@@ -1,11 +1,14 @@
-package com.parsetheprice.entities;
+package com.parsetheprice.data.entity;
 
-import java.net.URL;
+import androidx.room.Entity;
+@Entity(tableName = "price_tasks")
 public class PriceTask extends ParseTask{
     private long price;
     private long saveAmount;
 
-    public PriceTask(String name, URL link){
+    public PriceTask(){}
+
+    public PriceTask(String name, String link){
         super(name, link, "");
         super.setIsPrice(true);
         saveAmount = 0;
