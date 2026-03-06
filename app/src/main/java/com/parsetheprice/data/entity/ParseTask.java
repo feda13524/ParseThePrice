@@ -8,13 +8,12 @@ import java.util.Date;
 import java.util.Locale;
 
 @Entity(tableName = "parse_tasks")
-public class ParseTask {
+public class ParseTask{
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
     private String link;
-    private char status;
-    // + - ?
+    private char status; // +parsed -error ?parsing
     private long lastTime;
     private boolean isPrice;
     private String message;
