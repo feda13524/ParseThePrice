@@ -20,6 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainParse"
+            android:parentActivityName=".MainParse" />
+
+        <activity
+            android:name=".MainPrice"
+            android:parentActivityName=".MainPrice" />
     </application>
 
 </manifest>
