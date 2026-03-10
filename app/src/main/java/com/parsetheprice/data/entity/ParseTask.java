@@ -1,26 +1,32 @@
-package com.parsetheprice.entities;
+package com.parsetheprice.data.entity;
 
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.net.URL;
 
-public class ParseTask {
+@Entity(tableName = "parse_tasks")
+public class ParseTask{
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
-    private URL link;
-    private char status;
-    // + - ?
+    private String link;
+    private char status; // +parsed -error ?parsing
     private long lastTime;
     private boolean isPrice;
     private String message;
     private String parseData;
 
-    public ParseTask(String name, URL link, String message){
+    public ParseTask(){}
+
+    public ParseTask(String name, String link, String message){
         this.name = name;
         this.link = link;
         this.status = '?';
-        isPrice = false;
+        this.lastTime = System.currentTimeMillis();
+        this.isPrice = false;
         this.message = message;
     }
 
@@ -30,8 +36,8 @@ public class ParseTask {
     public String getName(){ return name; }
     public void setName(String name){ this.name = name; }
 
-    public URL getLink(){ return link; }
-    public void setLink(URL link){ this.link = link; }
+    public String getLink(){ return link; }
+    public void setLink(String link){ this.link = link; }
 
     public char getStatus(){ return status; }
     public void setStatus(char status){ this.status = status; }
@@ -53,14 +59,3 @@ public class ParseTask {
         return sdf.format(new Date(lastTime));
     }
 }
-
-/*
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-import androidx.annotation.NonNull;
-
-@Entity(tableName = "requests")
-public class RequestEntity {
-    @PrimaryKey(autoGenerate = true)
-    private long id;
-*/
