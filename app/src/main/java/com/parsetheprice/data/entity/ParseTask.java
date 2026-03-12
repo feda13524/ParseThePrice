@@ -18,16 +18,21 @@ public class ParseTask{
     private boolean isPrice;
     private String message;
     private String parseData;
-
-    public ParseTask(){}
+    private boolean isExpanded;
 
     public ParseTask(String name, String link, String message){
         this.name = name;
-        this.link = link;
+        this.link = formatLink(link);
         this.status = '?';
         this.lastTime = System.currentTimeMillis();
         this.isPrice = false;
         this.message = message;
+    }
+    private String formatLink(String link) {
+        if (!link.startsWith("http://") && !link.startsWith("https://")) {
+            return "https://" + link;
+        }
+        return link;
     }
 
     public long getId(){ return id; }
@@ -37,7 +42,7 @@ public class ParseTask{
     public void setName(String name){ this.name = name; }
 
     public String getLink(){ return link; }
-    public void setLink(String link){ this.link = link; }
+    public void setLink(String link){ this.link = formatLink(link); }
 
     public char getStatus(){ return status; }
     public void setStatus(char status){ this.status = status; }
@@ -53,6 +58,8 @@ public class ParseTask{
 
     public String getParseData(){ return parseData; }
     public void setParseData(String parseData){ this.parseData = parseData; }
+    public boolean isExpanded() { return isExpanded; }
+    public void setExpanded(boolean expanded) { isExpanded = expanded; }
 
     public String getFormattedDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault());

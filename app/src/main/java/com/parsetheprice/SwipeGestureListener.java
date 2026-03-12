@@ -1,12 +1,10 @@
 package com.parsetheprice;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import com.parsetheprice.MainParse;
-import com.parsetheprice.MainPrice;
+import com.parsetheprice.parse.MainParse;
 
 public class SwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
 
