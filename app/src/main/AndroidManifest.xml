@@ -21,8 +21,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainParse"
-            android:parentActivityName=".MainParse" />
+            android:name=".parse.MainParse"
+            android:parentActivityName=".parse.MainParse" />
 
         <activity
             android:name=".MainPrice"
