@@ -10,19 +10,28 @@
         android:id="@+id/top_section"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:gravity="center"
+        android:background="@color/parse_color"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/center_guideline">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ПАРСИНГ"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/holo_blue_bright"/>
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:layout_marginRight="24dp"
+                app:srcCompat="@drawable/search" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ПАРСИНГ"
+                android:textColor="@color/txt_color"
+                android:textSize="30sp"
+
+                android:textStyle="bold" />
+        </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/center_guideline"
@@ -33,7 +42,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="5dp"
         android:background="@android:color/black"
         app:layout_constraintTop_toTopOf="@id/center_guideline"
         app:layout_constraintBottom_toBottomOf="@id/center_guideline"/>
@@ -42,18 +51,26 @@
         android:id="@+id/bottom_section"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/center_guideline"
+        android:background="@color/price_color"
         app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="24dp"
+            app:srcCompat="@drawable/back" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="КОПИЛКА"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/holo_blue_bright"/>
+            android:textColor="@color/txt_color"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

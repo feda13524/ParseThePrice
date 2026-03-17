@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/top_section">
+    android:background="@color/parse_color">
 
     <ImageButton
         android:id="@+id/btnBack"
@@ -13,7 +13,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
-        android:background="@color/top_section"
+        android:background="@color/parse_color"
         android:contentDescription="Назад"
         android:scaleType="centerInside"
         android:src="@drawable/back"
