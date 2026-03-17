@@ -51,6 +51,15 @@ public class MainParse extends AppCompatActivity {
             adapter.notifyItemChanged(position);
         });
 
+        adapter.setOnDeleteClickListener((task, position) -> {
+            taskList.remove(position);
+            adapter.setTasks(taskList);
+        });
+        adapter.setOnRefreshClickListener((task, position) -> {
+            task.updateTimestamp();  // обновляем время
+            adapter.updateTask(position);  // обновляем отображение
+        });
+
         addButton.setOnClickListener(v -> {
             add_dialog dialog = new add_dialog();
             dialog.setOnTaskAddedListener(task -> {

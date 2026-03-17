@@ -3,6 +3,7 @@ package com.parsetheprice.parse;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,15 +18,27 @@ public class Parse_task_adapter extends RecyclerView.Adapter<Parse_task_adapter.
 
     private List<ParseTask> tasks = new ArrayList<>();
     private OnItemClickListener listener;
+    private OnDeleteClickListener deleteListener;
+    private OnRefreshClickListener refreshListener;
 
     public interface OnItemClickListener {
         void onExpandClick(ParseTask task, int position);
     }
-
+    public interface OnDeleteClickListener {
+        void onDeleteClick(ParseTask task, int position);
+    }
+    public interface OnRefreshClickListener {
+        void onRefreshClick(ParseTask task, int position);
+    }
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
-
+    public void setOnDeleteClickListener(OnDeleteClickListener deleteListener) {
+        this.deleteListener = deleteListener;
+    }
+    public void setOnRefreshClickListener(OnRefreshClickListener refreshListener) {
+        this.refreshListener = refreshListener;
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -37,13 +50,13 @@ public class Parse_task_adapter extends RecyclerView.Adapter<Parse_task_adapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ParseTask task = tasks.get(position);
-
         String link = task.getLink();
         if (link.length() > 40) {
             link = link.substring(0, 37) + "...";
         }
         holder.linkTextView.setText(link);
-
+        holder.nameTextView.setText(task.getName());
+        holder.lastUpdatedTextView.setText(task.getFormattedDate());
         if (task.isExpanded()) {
             holder.expandedContent.setVisibility(View.VISIBLE);
             holder.expandButton.setRotation(180);
@@ -51,12 +64,22 @@ public class Parse_task_adapter extends RecyclerView.Adapter<Parse_task_adapter.
             holder.expandedContent.setVisibility(View.GONE);
             holder.expandButton.setRotation(0);
         }
-        holder.nameTextView.setText(task.getName());
+        //holder.nameTextView.setText(task.getName());
         holder.userTextTextView.setText(task.getMessage());
 
         holder.expandButton.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onExpandClick(task, position);
+            }
+        });
+        holder.deleteButton.setOnClickListener(v -> {
+            if (deleteListener != null) {
+                deleteListener.onDeleteClick(task, position);
+            }
+        });
+        holder.refreshButton.setOnClickListener(v -> {
+            if (refreshListener != null) {
+                refreshListener.onRefreshClick(task, position);
             }
         });
     }
@@ -75,9 +98,13 @@ public class Parse_task_adapter extends RecyclerView.Adapter<Parse_task_adapter.
         tasks.add(task);
         notifyItemInserted(tasks.size() - 1);
     }
-
+    public void updateTask(int position) {
+        notifyItemChanged(position);
+    }
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView linkTextView, userTextTextView, fullLinkTextView, nameTextView;
+        TextView linkTextView, userTextTextView, nameTextView;
+        TextView lastUpdatedTextView;
+        ImageButton refreshButton, deleteButton;
         ImageView expandButton;
         LinearLayout expandedContent;
 
@@ -86,7 +113,10 @@ public class Parse_task_adapter extends RecyclerView.Adapter<Parse_task_adapter.
             linkTextView = itemView.findViewById(R.id.linkTextView);
             nameTextView = itemView.findViewById(R.id.nameTextView);
             userTextTextView = itemView.findViewById(R.id.userTextTextView);
+            lastUpdatedTextView = itemView.findViewById(R.id.lastUpdatedTextView);
             expandButton = itemView.findViewById(R.id.expandButton);
+            refreshButton = itemView.findViewById(R.id.refreshButton);
+            deleteButton = itemView.findViewById(R.id.deleteButton);
             expandedContent = itemView.findViewById(R.id.expandedContent);
         }
     }

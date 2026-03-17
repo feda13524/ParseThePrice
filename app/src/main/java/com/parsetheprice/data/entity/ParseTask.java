@@ -60,9 +60,11 @@ public class ParseTask{
     public void setParseData(String parseData){ this.parseData = parseData; }
     public boolean isExpanded() { return isExpanded; }
     public void setExpanded(boolean expanded) { isExpanded = expanded; }
-
+    public void updateTimestamp() {
+        this.lastTime = System.currentTimeMillis();
+    }
     public String getFormattedDate() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm / dd.MM.yyyy", Locale.getDefault());
         return sdf.format(new Date(lastTime));
     }
 }
