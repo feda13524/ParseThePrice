@@ -1,10 +1,14 @@
 package com.parsetheprice.data.entity;
 
 import androidx.room.Entity;
+
 @Entity(tableName = "price_tasks")
 public class PriceTask extends ParseTask{
     private long price;
     private long saveAmount;
+
+    public PriceTask(){}
+
     public PriceTask(String name, String link){
         super(name, link, "");
         super.setIsPrice(true);
