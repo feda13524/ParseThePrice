@@ -27,22 +27,6 @@ public interface PriceTaskDao{
     LiveData<List<PriceTask>> getAllTasksFromCheap();
     // От дешёвых к дорогим
 
-    @Query("SELECT * FROM price_tasks ORDER BY (price - saveAmount) DESC")
-    LiveData<List<PriceTask>> getAllTasksFromLargeRemainder();
-    // От большего остатка к меньшему
-
-    @Query("SELECT * FROM price_tasks ORDER BY (price - saveAmount) ASC")
-    LiveData<List<PriceTask>> getAllTasksFromSmallRemainder();
-    // От меньшего остатка к большему
-
-    @Query("SELECT * FROM price_tasks ORDER BY (saveAmount * 1.0 / price) DESC")
-    LiveData<List<PriceTask>> getAllTasksFromMoreComplete();
-    // От более завершённых к менее завершённым
-
-    @Query("SELECT * FROM price_tasks ORDER BY (saveAmount * 1.0 / price) ASC")
-    LiveData<List<PriceTask>> getAllTasksFromLessComplete();
-    // От менее завершённых к более завершённым
-
     @Query("SELECT * FROM price_tasks WHERE id = :id")
     PriceTask getTaskById(long id);
 }
