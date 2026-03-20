@@ -47,7 +47,7 @@ public class MainParse extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener((task, position) -> {
-            task.setExpanded(!task.isExpanded());
+            task.setIsExpanded(!task.getIsExpanded());
             adapter.notifyItemChanged(position);
         });
 
@@ -56,7 +56,7 @@ public class MainParse extends AppCompatActivity {
             adapter.setTasks(taskList);
         });
         adapter.setOnRefreshClickListener((task, position) -> {
-            task.updateTimestamp();  // обновляем время
+            task.updateTime();  // обновляем время
             adapter.updateTask(position);  // обновляем отображение
         });
 

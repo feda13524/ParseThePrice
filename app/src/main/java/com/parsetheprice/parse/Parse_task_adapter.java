@@ -57,7 +57,7 @@ public class Parse_task_adapter extends RecyclerView.Adapter<Parse_task_adapter.
         holder.linkTextView.setText(link);
         holder.nameTextView.setText(task.getName());
         holder.lastUpdatedTextView.setText(task.getFormattedDate());
-        if (task.isExpanded()) {
+        if (task.getIsExpanded()) {
             holder.expandedContent.setVisibility(View.VISIBLE);
             holder.expandButton.setRotation(180);
         } else {
