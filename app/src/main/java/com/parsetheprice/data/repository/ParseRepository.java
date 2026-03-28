@@ -17,6 +17,8 @@ public class ParseRepository {
     private final PriceTaskDao priceTaskDao;
     private final LiveData<List<ParseTask>> parseTasks;
     private final LiveData<List<PriceTask>> priceTasks;
+    private final LiveData<List<PriceTask>> priceTasksFromCheap;
+    private final LiveData<List<PriceTask>> priceTasksFromExpensive;
     private final ExecutorService executor;
 
     public ParseRepository(Application application){
@@ -26,6 +28,9 @@ public class ParseRepository {
 
         parseTasks = parseTaskDao.getAllTasks();
         priceTasks = priceTaskDao.getAllTasks();
+        priceTasksFromCheap = priceTaskDao.getAllTasksFromCheap();
+        priceTasksFromExpensive = priceTaskDao.getAllTasksFromExpensive();
+
         executor = Executors.newSingleThreadExecutor();
     }
 
@@ -53,6 +58,14 @@ public class ParseRepository {
     // PRICE TASKS METHODS
     public LiveData<List<PriceTask>> getAllPriceTasks(){
         return priceTasks;
+    }
+
+    public LiveData<List<PriceTask>> getAllPriceTasksFromCheap(){
+        return priceTasksFromCheap;
+    }
+
+    public LiveData<List<PriceTask>> getAllPriceTasksFromExpensive(){
+        return priceTasksFromExpensive;
     }
 
     public PriceTask getPriceTaskById(long id){

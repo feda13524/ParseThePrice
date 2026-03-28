@@ -16,7 +16,7 @@ public interface ParseTaskDao{
     @Delete
     void delete(ParseTask task);
 
-    @Query("SELECT * FROM parse_tasks ORDER BY lastTime DESC")
+    @Query("SELECT * FROM parse_tasks ORDER BY createTime DESC")
     LiveData<List<ParseTask>> getAllTasks();
 
     @Query("SELECT * FROM parse_tasks WHERE id = :id")

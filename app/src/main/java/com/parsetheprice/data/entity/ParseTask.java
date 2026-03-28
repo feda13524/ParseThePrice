@@ -14,6 +14,7 @@ public class ParseTask{
     private String name;
     private String link;
     private char status; // +parsed -error ?parsing
+    private long createTime;
     private long lastTime;
     private boolean isPrice;
     private String message;
@@ -26,7 +27,8 @@ public class ParseTask{
         this.name = name;
         this.link = formatLink(link);
         this.status = '?';
-        this.lastTime = System.currentTimeMillis();
+        this.createTime = System.currentTimeMillis();
+        this.lastTime = createTime;
         this.isPrice = false;
         this.message = message;
     }
