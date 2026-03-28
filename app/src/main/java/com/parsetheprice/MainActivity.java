@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private float startY;
     private GestureDetector gestureDetector;
 
-    private SharedPreferencesManager prefMgr;
+    private static SharedPreferencesManager prefMgr;
     private static long balance;
 
     @Override
@@ -44,4 +44,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static long getBalance(){ return balance; }
+    public static void setBalance(long newBalance){
+        prefMgr.saveBalance(newBalance);
+        balance = prefMgr.loadBalance();
+    }
+    public static void addBalance(long sum){
+        setBalance(balance + sum);
+    }
 }
