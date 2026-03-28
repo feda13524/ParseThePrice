@@ -16,7 +16,7 @@ public interface PriceTaskDao{
     @Delete
     void delete(PriceTask task);
 
-    @Query("SELECT * FROM price_tasks ORDER BY lastTime DESC")
+    @Query("SELECT * FROM price_tasks ORDER BY createTime DESC")
     LiveData<List<PriceTask>> getAllTasks();
 
     @Query("SELECT * FROM price_tasks ORDER BY price DESC")
