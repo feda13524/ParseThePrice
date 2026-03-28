@@ -51,6 +51,9 @@ public class ParseTask{
     public char getStatus(){ return status; }
     public void setStatus(char status){ this.status = status; }
 
+    public long getCreateTime(){ return createTime; }
+    public void setCreateTime(long createTime){ this.createTime = createTime; }
+
     public long getLastTime(){ return lastTime; }
     public void setLastTime(long lastTime){ this.lastTime = lastTime; }
 
