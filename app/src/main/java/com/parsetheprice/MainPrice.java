@@ -2,26 +2,29 @@ package com.parsetheprice;
 
 import android.os.Bundle;
 import android.view.View;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.parsetheprice.R;
+import com.parsetheprice.data.entity.PriceTask;
+import com.parsetheprice.Price_task_adapter;
+import com.parsetheprice.add_dialog_price;
+import java.util.ArrayList;
+import java.util.List;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.parsetheprice.data.entity.PriceTask;
-import com.parsetheprice.utils.SharedPreferencesManager;
+import com.parsetheprice.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainPrice extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private PriceItemAdapter adapter;
-    private List<PriceTask> priceItems;
-    private ImageView addButtonPrice;
-    private ImageView balanceButton;
-    private SharedPreferencesManager preferencesManager;
+    private Price_task_adapter adapter;
+    private List<PriceTask> priceItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,36 +38,36 @@ public class MainPrice extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_up);
             }
         });
-        initViews();
-        //initData();  в будущем для работы с балансом
-        //setupRecyclerView();
-        setupFabButtons();
-    }
-
-    private void initViews() {
         recyclerView = findViewById(R.id.tasksRecyclerView);
-        addButtonPrice = findViewById(R.id.addButtonPrice);
-        balanceButton = findViewById(R.id.balanceButton);
-    }
+        ImageView addButtonPrice = findViewById(R.id.addButtonPrice);
 
-//    private void initData() {
-//        preferencesManager = new SharedPreferencesManager(this);
-//        priceItems = new ArrayList<>();
-//    }
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new Price_task_adapter();
+        recyclerView.setAdapter(adapter);
 
-//    private void setupRecyclerView() {
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        adapter = new PriceItemAdapter(priceItems, this, userBalance);
-//        recyclerView.setAdapter(adapter);
-//    }
+        adapter.setOnItemClickListener((task, position) -> {
+            task.setIsExpanded(!task.getIsExpanded());
+            adapter.notifyItemChanged(position);
+        });
 
-    private void setupFabButtons() {
+        adapter.setOnDeleteClickListener((task, position) -> {
+            priceItems.remove(position);
+            adapter.setTasks(priceItems);
+        });
+        adapter.setOnRefreshClickListener((task, position) -> {
+            task.updateTime();  // обновляем время
+            adapter.updateTask(position);  // обновляем отображение
+        });
+
         addButtonPrice.setOnClickListener(v -> {
-        });
-        balanceButton.setOnClickListener(v -> {
+            add_dialog_price dialog = new add_dialog_price();
+            dialog.setOnTaskAddedListener(task -> {
+                priceItems.add(task);
+                adapter.setTasks(priceItems);
+            });
+            dialog.show(getSupportFragmentManager(), "AddTaskDialog");
         });
     }
-
     public void goBack(View view) {
         finish();
     }

@@ -1,4 +1,4 @@
-package com.parsetheprice.parse;
+package com.parsetheprice;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -16,13 +16,14 @@ import androidx.fragment.app.DialogFragment;
 
 import com.parsetheprice.R;
 import com.parsetheprice.data.entity.ParseTask;
+import com.parsetheprice.data.entity.PriceTask;
 
-public class add_dialog extends DialogFragment {
+public class add_dialog_price extends DialogFragment {
 
     private OnTaskAddedListener listener;
 
     public interface OnTaskAddedListener {
-        void onTaskAdded(ParseTask task);
+        void onTaskAdded(PriceTask task);
     }
 
     public void setOnTaskAddedListener(OnTaskAddedListener listener) {
@@ -41,7 +42,7 @@ public class add_dialog extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.add_dialog_parse, container, false);
+        return inflater.inflate(R.layout.add_dialog_price, container, false);
     }
 
     @Override
@@ -50,8 +51,7 @@ public class add_dialog extends DialogFragment {
 
         EditText nameEditText = view.findViewById(R.id.nameEditText);
         EditText linkEditText = view.findViewById(R.id.linkEditText);
-        EditText userTextEditText = view.findViewById(R.id.userTextEditText);
-        ImageView addButton = view.findViewById(R.id.addButtonTask);
+        ImageView addButton = view.findViewById(R.id.addButtonPrice);
         ImageButton closeButton = view.findViewById(R.id.closeButton);
 
         closeButton.setOnClickListener(v -> {
@@ -61,10 +61,9 @@ public class add_dialog extends DialogFragment {
         addButton.setOnClickListener(v -> {
             String name = nameEditText.getText().toString().trim();
             String link = linkEditText.getText().toString().trim();
-            String userText = userTextEditText.getText().toString().trim();
 
-            if (!name.isEmpty() && !link.isEmpty() && !userText.isEmpty()) {
-                ParseTask task = new ParseTask(name, link, userText);
+            if (!name.isEmpty() && !link.isEmpty()) {
+                PriceTask task = new PriceTask(name, link);
                 if (listener != null) {
                     listener.onTaskAdded(task);
                 }
