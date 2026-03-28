@@ -26,7 +26,7 @@
         android:layout_height="0dp"
         android:layout_margin="8dp"
         app:layout_constraintTop_toBottomOf="@id/btnBack"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/addButtonParse"
         tools:layout_editor_absoluteX="6dp" />
 
     <ImageView

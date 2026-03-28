@@ -37,7 +37,7 @@ public class MainPrice extends AppCompatActivity {
         });
         initViews();
         //initData();  в будущем для работы с балансом
-        setupRecyclerView();
+        //setupRecyclerView();
         setupFabButtons();
     }
 
@@ -52,11 +52,11 @@ public class MainPrice extends AppCompatActivity {
 //        priceItems = new ArrayList<>();
 //    }
 
-    private void setupRecyclerView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new PriceItemAdapter(priceItems, this, userBalance);
-        recyclerView.setAdapter(adapter);
-    }
+//    private void setupRecyclerView() {
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        adapter = new PriceItemAdapter(priceItems, this, userBalance);
+//        recyclerView.setAdapter(adapter);
+//    }
 
     private void setupFabButtons() {
         addButtonPrice.setOnClickListener(v -> {
