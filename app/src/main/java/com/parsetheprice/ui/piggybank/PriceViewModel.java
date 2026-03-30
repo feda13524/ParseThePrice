@@ -18,6 +18,12 @@ public class PriceViewModel extends AndroidViewModel{
     public LiveData<List<PriceTask>> getAllTasks(){
         return repository.getAllPriceTasks();
     }
+    public LiveData<List<PriceTask>> getAllTasksFromExpensive(){
+        return repository.getAllPriceTasksFromExpensive();
+    }
+    public LiveData<List<PriceTask>> getAllTasksFromCheap(){
+        return repository.getAllPriceTasksFromCheap();
+    }
     public PriceTask getTaskById(long id){
         return repository.getPriceTaskById(id);
     }
