@@ -1,4 +1,4 @@
-package com.parsetheprice;
+package com.parsetheprice.ui.piggybank;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.parsetheprice.R;
 import com.parsetheprice.data.entity.PriceTask;
 
 public class AddDialogPrice extends DialogFragment {

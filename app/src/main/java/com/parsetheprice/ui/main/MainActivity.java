@@ -1,60 +1,51 @@
 package com.parsetheprice.ui.main;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.graphics.Insets;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import com.parsetheprice.R;
 import com.parsetheprice.data.entity.ParseTask;
-import com.parsetheprice.ui.adapter.TaskAdapter;
+
+import com.parsetheprice.utils.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    private float startY;
     private MainViewModel viewModel;
-    private RecyclerView recyclerView;
-    private TaskAdapter adapter;
     private List<ParseTask> taskList = new ArrayList<>();
+    private GestureDetector gestureDetector;
+
+    private static SharedPreferencesManager prefMgr;
+    private static long balance;
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        gestureDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_main2);
+        gestureDetector = new GestureDetector(this, new SwipeGestureListener(this));
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
-        recyclerView = findViewById(R.id.tasksRecyclerView);
-        ImageView addButton = findViewById(R.id.addButtonParse);
-        addButton.setOnClickListener(v -> {
-            Toast.makeText(this, "Добавление задачи", Toast.LENGTH_SHORT).show();
+        // Бары - батарея и тд для сохранения отступов
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
         });
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new TaskAdapter();
-        recyclerView.setAdapter(adapter);
-
-        // Подписка на данные
-        viewModel.getAllParseTasks().observe(this, tasks -> {
-            if (tasks != null) {
-                taskList = tasks;
-                adapter.setTasks(taskList);
-            }
-        });
-
-        // Кнопка добавления (пока просто Toast)
-        addButton.setOnClickListener(v -> {
-            Toast.makeText(this, "Добавление задачи", Toast.LENGTH_SHORT).show();
-        });
-    }
-
-    public void goBack(View view) {
-        finish();
     }
 }

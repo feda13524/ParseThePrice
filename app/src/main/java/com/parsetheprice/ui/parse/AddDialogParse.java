@@ -1,4 +1,4 @@
-package com.parsetheprice.parse;
+package com.parsetheprice.ui.parse;
 
 import android.app.Dialog;
 import android.os.Bundle;
