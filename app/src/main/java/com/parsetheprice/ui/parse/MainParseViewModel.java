@@ -4,14 +4,31 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import com.parsetheprice.data.entity.ParseTask;
-import com.parsetheprice.data.entity.PriceTask;
 import com.parsetheprice.data.repository.ParseRepository;
 import java.util.List;
 
-public class MainParseViewModel extends AndroidViewModel {
+public class MainParseViewModel extends AndroidViewModel{
+    private final ParseRepository repository;
 
-    public MainParseViewModel(Application application) {
+    public MainParseViewModel(Application application){
         super(application);
+        repository = new ParseRepository(application);
     }
 
+    public LiveData<List<ParseTask>> getAllTasks(){
+        return repository.getAllParseTasks();
+    }
+    public ParseTask getTaskById(long id){
+        return repository.getParseTaskById(id);
+    }
+    public void insert(String name, String link, String message){
+        ParseTask task = new ParseTask(name, link, message);
+        repository.insert(task);
+    }
+    public void update(ParseTask task){
+        repository.update(task);
+    }
+    public void delete(ParseTask task){
+        repository.delete(task);
+    }
 }
