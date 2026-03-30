@@ -3,6 +3,7 @@ package com.parsetheprice.ui.parse;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,12 +21,14 @@ public class MainParse extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ParseTaskAdapter adapter;
     private List<ParseTask> taskList = new ArrayList<>();
+    private MainParseViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_parse);
         ImageButton btnBack = findViewById(R.id.btnBack);
+        viewModel = new ViewModelProvider(this).get(MainParseViewModel.class);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

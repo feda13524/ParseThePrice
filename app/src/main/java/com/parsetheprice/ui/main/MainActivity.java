@@ -20,7 +20,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private float startY;
-    private MainViewModel viewModel;
     private List<ParseTask> taskList = new ArrayList<>();
     private GestureDetector gestureDetector;
 
@@ -38,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         gestureDetector = new GestureDetector(this, new SwipeGestureListener(this));
-        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         // Бары - батарея и тд для сохранения отступов
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

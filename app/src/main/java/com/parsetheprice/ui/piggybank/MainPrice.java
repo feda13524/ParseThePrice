@@ -3,6 +3,7 @@ package com.parsetheprice.ui.piggybank;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,12 +20,14 @@ public class MainPrice extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PriceTaskAdapter adapter;
     private List<PriceTask> priceItems = new ArrayList<>();
+    private PriceViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_price);
         ImageButton btnBack = findViewById(R.id.btnBack);
+        viewModel = new ViewModelProvider(this).get(PriceViewModel.class);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
