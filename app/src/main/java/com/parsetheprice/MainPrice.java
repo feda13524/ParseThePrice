@@ -5,25 +5,17 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.parsetheprice.R;
+
 import com.parsetheprice.data.entity.PriceTask;
-import com.parsetheprice.Price_task_adapter;
-import com.parsetheprice.add_dialog_price;
+
 import java.util.ArrayList;
 import java.util.List;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.parsetheprice.R;
-
-import java.util.List;
-
 public class MainPrice extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private Price_task_adapter adapter;
+    private PriceTaskAdapter adapter;
     private List<PriceTask> priceItems = new ArrayList<>();
 
     @Override
@@ -42,7 +34,7 @@ public class MainPrice extends AppCompatActivity {
         ImageView addButtonPrice = findViewById(R.id.addButtonPrice);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new Price_task_adapter();
+        adapter = new PriceTaskAdapter();
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener((task, position) -> {
@@ -60,7 +52,7 @@ public class MainPrice extends AppCompatActivity {
         });
 
         addButtonPrice.setOnClickListener(v -> {
-            add_dialog_price dialog = new add_dialog_price();
+            AddDialogPrice dialog = new AddDialogPrice();
             dialog.setOnTaskAddedListener(task -> {
                 priceItems.add(task);
                 adapter.setTasks(priceItems);

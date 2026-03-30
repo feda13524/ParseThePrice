@@ -17,7 +17,7 @@ import androidx.fragment.app.DialogFragment;
 import com.parsetheprice.R;
 import com.parsetheprice.data.entity.ParseTask;
 
-public class add_dialog extends DialogFragment {
+public class AddDialogParse extends DialogFragment {
 
     private OnTaskAddedListener listener;
 

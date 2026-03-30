@@ -1,5 +1,6 @@
 package com.parsetheprice;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.graphics.Insets;
+import com.parsetheprice.data.repository.ParseRepository;
 
 import com.parsetheprice.utils.SharedPreferencesManager;
 
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static SharedPreferencesManager prefMgr;
     private static long balance;
+    private static ParseRepository repository;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

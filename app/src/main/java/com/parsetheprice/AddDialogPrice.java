@@ -14,11 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.parsetheprice.R;
-import com.parsetheprice.data.entity.ParseTask;
 import com.parsetheprice.data.entity.PriceTask;
 
-public class add_dialog_price extends DialogFragment {
+public class AddDialogPrice extends DialogFragment {
 
     private OnTaskAddedListener listener;
 

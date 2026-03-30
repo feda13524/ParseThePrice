@@ -5,24 +5,19 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import com.parsetheprice.R;
 import com.parsetheprice.data.entity.ParseTask;
-import com.parsetheprice.parse.Parse_task_adapter;
-import com.parsetheprice.parse.add_dialog;
+
 import java.util.ArrayList;
 import java.util.List;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.parsetheprice.R;
-
 public class MainParse extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private Parse_task_adapter adapter;
+    private ParseTaskAdapter adapter;
     private List<ParseTask> taskList = new ArrayList<>();
 
     @Override
@@ -43,7 +38,7 @@ public class MainParse extends AppCompatActivity {
         ImageView addButton = findViewById(R.id.addButtonParse);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new Parse_task_adapter();
+        adapter = new ParseTaskAdapter();
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener((task, position) -> {
@@ -61,7 +56,7 @@ public class MainParse extends AppCompatActivity {
         });
 
         addButton.setOnClickListener(v -> {
-            add_dialog dialog = new add_dialog();
+            AddDialogParse dialog = new AddDialogParse();
             dialog.setOnTaskAddedListener(task -> {
                 taskList.add(task);
                 adapter.setTasks(taskList);
