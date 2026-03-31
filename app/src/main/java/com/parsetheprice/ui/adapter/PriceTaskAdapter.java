@@ -88,6 +88,7 @@ public class PriceTaskAdapter extends RecyclerView.Adapter<PriceTaskAdapter.View
     public void updateTask(int position) {
         notifyItemChanged(position);
     }
+    //public void updatebalance(int balance){}
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView linkTextView, nameTextView;
         TextView lastUpdatedTextView;

@@ -30,6 +30,7 @@ public class MainPrice extends AppCompatActivity {
         ImageButton btnBack = findViewById(R.id.btnBack);
         TextView balance = findViewById(R.id.balanceText);
         viewModel = new ViewModelProvider(this).get(PriceViewModel.class);
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,6 +40,7 @@ public class MainPrice extends AppCompatActivity {
         });
         recyclerView = findViewById(R.id.tasksRecyclerView);
         ImageView addButtonPrice = findViewById(R.id.addButtonPrice);
+        ImageView balanceButton = findViewById(R.id.balanceButton);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new PriceTaskAdapter();
@@ -65,6 +67,11 @@ public class MainPrice extends AppCompatActivity {
                 adapter.setTasks(priceItems);
             });
             dialog.show(getSupportFragmentManager(), "AddTaskDialog");
+        });
+        balanceButton.setOnClickListener(v -> {
+            AddDialogBalance dialog = new AddDialogBalance();
+            dialog.setOnBalanceChangeListener(amount -> viewModel.addBalance(amount));
+            dialog.show(getSupportFragmentManager(), "AddBalanceDialog");
         });
     }
 }

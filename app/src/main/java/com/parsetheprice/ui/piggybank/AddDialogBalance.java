@@ -67,25 +67,57 @@ public class AddDialogBalance extends DialogFragment {
     }
 
     private void setupNumberButtons() {
-        View.OnClickListener numberListener = v -> {
-            Button button = (Button) v;
-            String digit = button.getText().toString();
-            inputNumber.append(digit);
+        // Для цифры 1
+        btn1.setOnClickListener(v -> {
+            inputNumber.append("1");
             updateInputDisplay();
-        };
+        });
 
-        btn0.setOnClickListener(numberListener);
-        btn1.setOnClickListener(numberListener);
-        btn2.setOnClickListener(numberListener);
-        btn3.setOnClickListener(numberListener);
-        btn4.setOnClickListener(numberListener);
-        btn5.setOnClickListener(numberListener);
-        btn6.setOnClickListener(numberListener);
-        btn7.setOnClickListener(numberListener);
-        btn8.setOnClickListener(numberListener);
-        btn9.setOnClickListener(numberListener);
+        btn2.setOnClickListener(v -> {
+            inputNumber.append("2");
+            updateInputDisplay();
+        });
+
+        btn3.setOnClickListener(v -> {
+            inputNumber.append("3");
+            updateInputDisplay();
+        });
+
+        btn4.setOnClickListener(v -> {
+            inputNumber.append("4");
+            updateInputDisplay();
+        });
+
+        btn5.setOnClickListener(v -> {
+            inputNumber.append("5");
+            updateInputDisplay();
+        });
+
+        btn6.setOnClickListener(v -> {
+            inputNumber.append("6");
+            updateInputDisplay();
+        });
+
+        btn7.setOnClickListener(v -> {
+            inputNumber.append("7");
+            updateInputDisplay();
+        });
+
+        btn8.setOnClickListener(v -> {
+            inputNumber.append("8");
+            updateInputDisplay();
+        });
+
+        btn9.setOnClickListener(v -> {
+            inputNumber.append("9");
+            updateInputDisplay();
+        });
+
+        btn0.setOnClickListener(v -> {
+            inputNumber.append("0");
+            updateInputDisplay();
+        });
     }
-
     private void setupDeleteButton() {
         btnDelete.setOnClickListener(v -> {
             if (inputNumber.length() > 0) {
@@ -94,41 +126,34 @@ public class AddDialogBalance extends DialogFragment {
             }
         });
     }
-
     private void setupAddButton() {
         btnAdd.setOnClickListener(v -> {
             long amount = getInputValue();
             if (amount > 0) {
                 clearInput();
-
                 if (listener != null) {
                     listener.onBalanceChanged(amount);
                 }
             }
         });
     }
-
     private void setupSubtractButton() {
         btnSubtract.setOnClickListener(v -> {
             long amount = getInputValue();
             if (amount > 0) {
                 clearInput();
-
                 if (listener != null) {
                     listener.onBalanceChanged(-amount);
                 }
             }
         });
     }
-
     private long getInputValue() {
         if (TextUtils.isEmpty(inputNumber.toString())) {
             return 0;
         }
         return Long.parseLong(inputNumber.toString());
     }
-
-
     private void updateInputDisplay() {
         if (inputNumber.length() == 0) {
             InputNumber.setText("0");
@@ -136,7 +161,6 @@ public class AddDialogBalance extends DialogFragment {
             InputNumber.setText(inputNumber.toString());
         }
     }
-
     private void clearInput() {
         inputNumber.setLength(0);
         updateInputDisplay();
