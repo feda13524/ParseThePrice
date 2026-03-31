@@ -28,19 +28,13 @@ public class PriceViewModel extends AndroidViewModel{
     public LiveData<List<PriceTask>> getAllTasksFromCheap(){
         return repository.getAllPriceTasksFromCheap();
     }
-    public PriceTask getTaskById(long id){
-        return repository.getPriceTaskById(id);
-    }
+    public PriceTask getTaskById(long id){ return repository.getPriceTaskById(id); }
     public void insert(String name, String link){
         PriceTask task = new PriceTask(name, link);
         repository.insert(task);
     }
-    public void update(PriceTask task){
-        repository.update(task);
-    }
-    public void delete(PriceTask task){
-        repository.delete(task);
-    }
+    public void update(PriceTask task){ repository.update(task); }
+    public void delete(PriceTask task){ repository.delete(task); }
 
     // BALANCE
     public long getBalance(){ return prefMgr.loadBalance(); }

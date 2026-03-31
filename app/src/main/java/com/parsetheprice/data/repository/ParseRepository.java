@@ -83,71 +83,44 @@ public class ParseRepository {
     public void insert(PriceTask task){
         executor.execute(() -> priceTaskDao.insert(task));
     }
-
-    public void update(PriceTask task){
-        executor.execute(() -> priceTaskDao.update(task));
+    public void delete(long id){
+        executor.execute(() -> priceTaskDao.delete(priceTaskDao.getTaskById(id)));
     }
-
-    public void delete(PriceTask task){
-        executor.execute(() -> priceTaskDao.delete((task)));
-    }
-
-    // API
-    public void fetchPrice(PriceTask task, OnPriceFetchedListener listener) {
+    public void update(long id) {
         executor.execute(() -> {
+            PriceTask task = getPriceTaskById(id);
+            task.setStatus('?');
+            priceTaskDao.update(task);
             try {
-                // Создаем JSON тело запроса
                 String json = "{\"url\":\"" + task.getLink() + "\"}";
                 RequestBody body = RequestBody.create(
                         json,
                         MediaType.parse("application/json")
                 );
 
-                // Создаем запрос
                 Request request = new Request.Builder()
                         .url("https://api.fedosik.ru/ptp/price")
                         .post(body)
                         .build();
 
-                // Выполняем запрос
                 try (Response response = httpClient.newCall(request).execute()) {
                     if (response.isSuccessful()) {
                         String jsonResponse = response.body().string();
                         PriceResponse priceResponse = gson.fromJson(jsonResponse, PriceResponse.class);
 
-                        // Обновляем задачу
-                        task.setPrice((long) priceResponse.getPrice());
-                        task.setStatus(priceResponse.isResult() ? '+' : '-');
-                        task.updateTime();
-
-                        // Сохраняем в БД
-                        update(task);
-
-                        // Уведомляем слушателя
-                        if (listener != null) {
-                            listener.onSuccess(task);
-                        }
-                    } else {
-                        task.setStatus('-');
-                        update(task);
-                        if (listener != null) {
-                            listener.onError("Ошибка сервера");
-                        }
-                    }
+                        if (priceResponse.isResult()){
+                            task.setStatus('+');
+                            task.setPrice((long) priceResponse.getPrice());
+                        } else { task.setStatus('-'); }
+                    } else { task.setStatus('-'); }
+                    task.updateTime();
+                    priceTaskDao.update(task);
                 }
             } catch (Exception e) {
                 task.setStatus('-');
-                update(task);
-                if (listener != null) {
-                    listener.onError(e.getMessage());
-                }
+                task.updateTime();
+                priceTaskDao.update(task);
             }
         });
-    }
-
-    // Интерфейс для обратного вызова
-    public interface OnPriceFetchedListener {
-        void onSuccess(PriceTask task);
-        void onError(String error);
     }
 }

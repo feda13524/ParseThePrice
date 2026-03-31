@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.parsetheprice.ui.piggybank.PriceViewModel;
 import com.parsetheprice.R;
 
 public class AddDialogBalance extends DialogFragment {
@@ -21,13 +20,12 @@ public class AddDialogBalance extends DialogFragment {
     private ImageView btnDelete;
     private Button btnAdd;
     private Button btnSubtract;
-    private int balance;
 
     private StringBuilder inputNumber = new StringBuilder();
     private OnBalanceChangeListener listener;
 
     public interface OnBalanceChangeListener {
-        void onBalanceChanged(int newBalance);
+        void onBalanceChanged(long newBalance);
     }
 
     public void setOnBalanceChangeListener(OnBalanceChangeListener listener) {
@@ -99,13 +97,12 @@ public class AddDialogBalance extends DialogFragment {
 
     private void setupAddButton() {
         btnAdd.setOnClickListener(v -> {
-            int amount = getInputValue();
+            long amount = getInputValue();
             if (amount > 0) {
-                balance += amount;
                 clearInput();
 
                 if (listener != null) {
-                    listener.onBalanceChanged(balance);
+                    listener.onBalanceChanged(amount);
                 }
             }
         });
@@ -113,15 +110,22 @@ public class AddDialogBalance extends DialogFragment {
 
     private void setupSubtractButton() {
         btnSubtract.setOnClickListener(v -> {
-            int amount = getInputValue();
+            long amount = getInputValue();
+            if (amount > 0) {
+                clearInput();
+
+                if (listener != null) {
+                    listener.onBalanceChanged(-amount);
+                }
+            }
         });
     }
 
-    private int getInputValue() {
+    private long getInputValue() {
         if (TextUtils.isEmpty(inputNumber.toString())) {
             return 0;
         }
-        return Integer.parseInt(inputNumber.toString());
+        return Long.parseLong(inputNumber.toString());
     }
 
 
