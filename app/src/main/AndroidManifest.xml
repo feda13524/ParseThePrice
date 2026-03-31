@@ -20,13 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--        <activity-->
-<!--            android:name=".parse.MainParse"-->
-<!--            android:parentActivityName=".parse.MainParse" />-->
+        <activity
+            android:name=".ui.parse.MainParse"
+            android:parentActivityName=".ui.parse.MainParse" />
 
-<!--        <activity-->
-<!--            android:name=".MainPrice"-->
-<!--            android:parentActivityName=".MainPrice" />-->
+        <activity
+            android:name=".ui.piggybank.MainPrice"
+            android:parentActivityName=".ui.piggybank.MainPrice" />
     </application>
 
 </manifest>

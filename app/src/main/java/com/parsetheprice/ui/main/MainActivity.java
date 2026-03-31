@@ -8,23 +8,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.graphics.Insets;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.parsetheprice.R;
 import com.parsetheprice.data.entity.ParseTask;
-
-import com.parsetheprice.utils.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private float startY;
     private List<ParseTask> taskList = new ArrayList<>();
     private GestureDetector gestureDetector;
-
-    private static SharedPreferencesManager prefMgr;
-    private static long balance;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -35,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_main);
         gestureDetector = new GestureDetector(this, new SwipeGestureListener(this));
 
         // Бары - батарея и тд для сохранения отступов
