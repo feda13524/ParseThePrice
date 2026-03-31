@@ -33,8 +33,8 @@ public class PriceViewModel extends AndroidViewModel{
         PriceTask task = new PriceTask(name, link);
         repository.insert(task);
     }
-    public void update(PriceTask task){ repository.update(task); }
-    public void delete(PriceTask task){ repository.delete(task); }
+    public void update(long id){ repository.updatePriceTask(id); }
+    public void delete(long id){ repository.deletePriceTask(id); }
 
     // BALANCE
     public long getBalance(){ return prefMgr.loadBalance(); }

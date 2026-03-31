@@ -55,12 +55,12 @@ public class ParseRepository {
         executor.execute(() -> parseTaskDao.insert(task));
     }
 
-    public void update(ParseTask task){
-        executor.execute(() -> parseTaskDao.update(task));
+    public void updateParseTask(long id){
+        executor.execute(() -> parseTaskDao.update(getParseTaskById(id)));
     }
 
-    public void delete(ParseTask task){
-        executor.execute(() -> parseTaskDao.delete((task)));
+    public void deleteParseTask(long id){
+        executor.execute(() -> parseTaskDao.delete(getParseTaskById(id)));
     }
 
     // PRICE TASKS METHODS
@@ -83,10 +83,10 @@ public class ParseRepository {
     public void insert(PriceTask task){
         executor.execute(() -> priceTaskDao.insert(task));
     }
-    public void delete(long id){
+    public void deletePriceTask(long id){
         executor.execute(() -> priceTaskDao.delete(priceTaskDao.getTaskById(id)));
     }
-    public void update(long id) {
+    public void updatePriceTask(long id) {
         executor.execute(() -> {
             PriceTask task = getPriceTaskById(id);
             task.setStatus('?');
