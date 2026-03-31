@@ -5,14 +5,18 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import com.parsetheprice.data.entity.PriceTask;
 import com.parsetheprice.data.repository.ParseRepository;
+import com.parsetheprice.utils.SharedPreferencesManager;
+
 import java.util.List;
 
 public class PriceViewModel extends AndroidViewModel{
     private final ParseRepository repository;
+    private final SharedPreferencesManager prefMgr;
 
     public PriceViewModel(Application application){
         super(application);
         repository = new ParseRepository(application);
+        prefMgr = new SharedPreferencesManager(application);
     }
 
     public LiveData<List<PriceTask>> getAllTasks(){
@@ -37,4 +41,9 @@ public class PriceViewModel extends AndroidViewModel{
     public void delete(PriceTask task){
         repository.delete(task);
     }
+
+    // BALANCE
+    public long getBalance(){ return prefMgr.loadBalance(); }
+    public void setBalance(long newBalance){ prefMgr.saveBalance(newBalance); }
+    public void addBalance(long sum){ setBalance(getBalance() + sum); }
 }
