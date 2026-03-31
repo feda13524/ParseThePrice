@@ -22,14 +22,17 @@ public class MainPrice extends AppCompatActivity {
     private PriceTaskAdapter adapter;
     private List<PriceTask> priceItems = new ArrayList<>();
     private PriceViewModel viewModel;
+    private TextView balance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_price);
         ImageButton btnBack = findViewById(R.id.btnBack);
-        TextView balance = findViewById(R.id.balanceText);
+        balance = findViewById(R.id.balanceText);
         viewModel = new ViewModelProvider(this).get(PriceViewModel.class);
+
+        updateBalanceDisplay();
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,12 +69,24 @@ public class MainPrice extends AppCompatActivity {
                 priceItems.add(task);
                 adapter.setTasks(priceItems);
             });
+            updateBalanceDisplay();
             dialog.show(getSupportFragmentManager(), "AddTaskDialog");
         });
         balanceButton.setOnClickListener(v -> {
             AddDialogBalance dialog = new AddDialogBalance();
-            dialog.setOnBalanceChangeListener(amount -> viewModel.addBalance(amount));
+            dialog.setOnBalanceChangeListener(amount -> {viewModel.addBalance(amount);
+                updateBalanceDisplay();
+            });
             dialog.show(getSupportFragmentManager(), "AddBalanceDialog");
         });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateBalanceDisplay();
+    }
+    private void updateBalanceDisplay() {
+        long Balance = viewModel.getBalance();
+        balance.setText(String.valueOf(Balance));
     }
 }

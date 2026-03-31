@@ -1,5 +1,6 @@
 package com.parsetheprice.ui.piggybank;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -134,6 +135,7 @@ public class AddDialogBalance extends DialogFragment {
                 if (listener != null) {
                     listener.onBalanceChanged(amount);
                 }
+                dismiss();
             }
         });
     }
@@ -145,6 +147,7 @@ public class AddDialogBalance extends DialogFragment {
                 if (listener != null) {
                     listener.onBalanceChanged(-amount);
                 }
+                dismiss();
             }
         });
     }

@@ -18,6 +18,7 @@ public class PriceTaskAdapter extends RecyclerView.Adapter<PriceTaskAdapter.View
 
     private List<PriceTask> tasks = new ArrayList<>();
     private OnItemClickListener listener;
+    private long userBalance = 0;
     private OnDeleteClickListener deleteListener;
     private OnRefreshClickListener refreshListener;
 
@@ -45,6 +46,10 @@ public class PriceTaskAdapter extends RecyclerView.Adapter<PriceTaskAdapter.View
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_task_price, parent, false);
         return new ViewHolder(view);
+    }
+    public void updateBalance(long newBalance) {
+        this.userBalance = newBalance;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -88,11 +93,11 @@ public class PriceTaskAdapter extends RecyclerView.Adapter<PriceTaskAdapter.View
     public void updateTask(int position) {
         notifyItemChanged(position);
     }
-    //public void updatebalance(int balance){}
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView linkTextView, nameTextView;
         TextView lastUpdatedTextView;
         ImageButton refreshButton, deleteButton;
+        TextView balancetext;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -101,6 +106,7 @@ public class PriceTaskAdapter extends RecyclerView.Adapter<PriceTaskAdapter.View
             lastUpdatedTextView = itemView.findViewById(R.id.lastUpdatedTextView);
             refreshButton = itemView.findViewById(R.id.refreshButton);
             deleteButton = itemView.findViewById(R.id.deleteButton);
+            balancetext = itemView.findViewById(R.id.balanceText);
         }
     }
 }
