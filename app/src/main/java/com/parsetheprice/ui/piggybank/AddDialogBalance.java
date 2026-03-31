@@ -1,0 +1,140 @@
+package com.parsetheprice.ui.piggybank;
+
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+
+import com.parsetheprice.ui.piggybank.PriceViewModel;
+import com.parsetheprice.R;
+
+public class AddDialogBalance extends DialogFragment {
+    private TextView InputNumber;
+    private ImageView btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
+    private ImageView btnDelete;
+    private Button btnAdd;
+    private Button btnSubtract;
+    private int balance;
+
+    private StringBuilder inputNumber = new StringBuilder();
+    private OnBalanceChangeListener listener;
+
+    public interface OnBalanceChangeListener {
+        void onBalanceChanged(int newBalance);
+    }
+
+    public void setOnBalanceChangeListener(OnBalanceChangeListener listener) {
+        this.listener = listener;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.add_dialog_balance, container, false);
+
+        initViews(view);
+        setupNumberButtons();
+        setupDeleteButton();
+        setupAddButton();
+        setupSubtractButton();
+        updateInputDisplay();
+
+        return view;
+    }
+
+    private void initViews(View view) {
+        InputNumber = view.findViewById(R.id.InputNumber);
+
+        btn0 = view.findViewById(R.id.btn0);
+        btn1 = view.findViewById(R.id.btn1);
+        btn2 = view.findViewById(R.id.btn2);
+        btn3 = view.findViewById(R.id.btn3);
+        btn4 = view.findViewById(R.id.btn4);
+        btn5 = view.findViewById(R.id.btn5);
+        btn6 = view.findViewById(R.id.btn6);
+        btn7 = view.findViewById(R.id.btn7);
+        btn8 = view.findViewById(R.id.btn8);
+        btn9 = view.findViewById(R.id.btn9);
+
+        btnDelete = view.findViewById(R.id.btnDelete);
+        btnAdd = view.findViewById(R.id.btnAdd);
+        btnSubtract = view.findViewById(R.id.btnSubtract);
+    }
+
+    private void setupNumberButtons() {
+        View.OnClickListener numberListener = v -> {
+            Button button = (Button) v;
+            String digit = button.getText().toString();
+            inputNumber.append(digit);
+            updateInputDisplay();
+        };
+
+        btn0.setOnClickListener(numberListener);
+        btn1.setOnClickListener(numberListener);
+        btn2.setOnClickListener(numberListener);
+        btn3.setOnClickListener(numberListener);
+        btn4.setOnClickListener(numberListener);
+        btn5.setOnClickListener(numberListener);
+        btn6.setOnClickListener(numberListener);
+        btn7.setOnClickListener(numberListener);
+        btn8.setOnClickListener(numberListener);
+        btn9.setOnClickListener(numberListener);
+    }
+
+    private void setupDeleteButton() {
+        btnDelete.setOnClickListener(v -> {
+            if (inputNumber.length() > 0) {
+                inputNumber.deleteCharAt(inputNumber.length() - 1);
+                updateInputDisplay();
+            }
+        });
+    }
+
+    private void setupAddButton() {
+        btnAdd.setOnClickListener(v -> {
+            int amount = getInputValue();
+            if (amount > 0) {
+                balance += amount;
+                clearInput();
+
+                if (listener != null) {
+                    listener.onBalanceChanged(balance);
+                }
+            }
+        });
+    }
+
+    private void setupSubtractButton() {
+        btnSubtract.setOnClickListener(v -> {
+            int amount = getInputValue();
+        });
+    }
+
+    private int getInputValue() {
+        if (TextUtils.isEmpty(inputNumber.toString())) {
+            return 0;
+        }
+        return Integer.parseInt(inputNumber.toString());
+    }
+
+
+    private void updateInputDisplay() {
+        if (inputNumber.length() == 0) {
+            InputNumber.setText("0");
+        } else {
+            InputNumber.setText(inputNumber.toString());
+        }
+    }
+
+    private void clearInput() {
+        inputNumber.setLength(0);
+        updateInputDisplay();
+    }
+}

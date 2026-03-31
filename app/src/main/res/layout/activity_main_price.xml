@@ -50,4 +50,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <TextView
+        android:id="@+id/balanceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="25dp"
+        app:layout_constraintRight_toLeftOf="@id/balanceButton"
+        app:layout_constraintBottom_toBottomOf="@id/balanceButton"
+        tools:layout_editor_absoluteX="235dp"
+        tools:layout_editor_absoluteY="677dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

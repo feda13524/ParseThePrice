@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainPrice extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -27,6 +28,7 @@ public class MainPrice extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_price);
         ImageButton btnBack = findViewById(R.id.btnBack);
+        TextView balance = findViewById(R.id.balanceText);
         viewModel = new ViewModelProvider(this).get(PriceViewModel.class);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,8 +66,5 @@ public class MainPrice extends AppCompatActivity {
             });
             dialog.show(getSupportFragmentManager(), "AddTaskDialog");
         });
-    }
-    public void goBack(View view) {
-        finish();
     }
 }
