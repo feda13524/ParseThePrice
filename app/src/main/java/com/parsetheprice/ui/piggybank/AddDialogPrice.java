@@ -22,7 +22,7 @@ public class AddDialogPrice extends DialogFragment {
     private OnTaskAddedListener listener;
 
     public interface OnTaskAddedListener {
-        void onTaskAdded(PriceTask task);
+        void onTaskAdded(String name, String link);
     }
 
     public void setOnTaskAddedListener(OnTaskAddedListener listener) {
@@ -64,7 +64,7 @@ public class AddDialogPrice extends DialogFragment {
             if (!name.isEmpty() && !link.isEmpty()) {
                 PriceTask task = new PriceTask(name, link);
                 if (listener != null) {
-                    listener.onTaskAdded(task);
+                    listener.onTaskAdded(name, link);
                 }
                 dismiss();
             }

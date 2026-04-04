@@ -22,7 +22,7 @@ public class AddDialogParse extends DialogFragment {
     private OnTaskAddedListener listener;
 
     public interface OnTaskAddedListener {
-        void onTaskAdded(ParseTask task);
+        void onTaskAdded(String name, String link, String massage);
     }
 
     public void setOnTaskAddedListener(OnTaskAddedListener listener) {
@@ -66,7 +66,7 @@ public class AddDialogParse extends DialogFragment {
             if (!name.isEmpty() && !link.isEmpty() && !userText.isEmpty()) {
                 ParseTask task = new ParseTask(name, link, userText);
                 if (listener != null) {
-                    listener.onTaskAdded(task);
+                    listener.onTaskAdded(name, link, userText);
                 }
                 dismiss();
             }

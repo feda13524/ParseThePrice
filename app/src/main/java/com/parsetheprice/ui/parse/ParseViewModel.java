@@ -7,10 +7,10 @@ import com.parsetheprice.data.entity.ParseTask;
 import com.parsetheprice.data.repository.ParseRepository;
 import java.util.List;
 
-public class MainParseViewModel extends AndroidViewModel{
+public class ParseViewModel extends AndroidViewModel{
     private final ParseRepository repository;
 
-    public MainParseViewModel(Application application){
+    public ParseViewModel(Application application){
         super(application);
         repository = new ParseRepository(application);
     }

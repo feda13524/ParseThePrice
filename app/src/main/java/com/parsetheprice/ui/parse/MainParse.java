@@ -21,14 +21,14 @@ public class MainParse extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ParseTaskAdapter adapter;
     private List<ParseTask> taskList = new ArrayList<>();
-    private MainParseViewModel viewModel;
+    private ParseViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_parse);
         ImageButton btnBack = findViewById(R.id.btnBack);
-        viewModel = new ViewModelProvider(this).get(MainParseViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ParseViewModel.class);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,25 +45,28 @@ public class MainParse extends AppCompatActivity {
         adapter = new ParseTaskAdapter();
         recyclerView.setAdapter(adapter);
 
+        viewModel.getAllTasks().observe(this, tasks -> {
+            if (tasks != null) {
+                adapter.setTasks(tasks);
+            }
+        });
+
         adapter.setOnItemClickListener((task, position) -> {
             task.setIsExpanded(!task.getIsExpanded());
             adapter.notifyItemChanged(position);
         });
 
         adapter.setOnDeleteClickListener((task, position) -> {
-            taskList.remove(position);
-            adapter.setTasks(taskList);
+            viewModel.delete(task.getId());
         });
         adapter.setOnRefreshClickListener((task, position) -> {
-            task.updateTime();  // обновляем время
-            adapter.updateTask(position);  // обновляем отображение
+            viewModel.update(task.getId());
         });
 
         addButton.setOnClickListener(v -> {
             AddDialogParse dialog = new AddDialogParse();
-            dialog.setOnTaskAddedListener(task -> {
-                taskList.add(task);
-                adapter.setTasks(taskList);
+            dialog.setOnTaskAddedListener((name, link, massage) -> {
+                viewModel.insert(name, link, massage);
             });
             dialog.show(getSupportFragmentManager(), "AddTaskDialog");
         });

@@ -49,25 +49,28 @@ public class MainPrice extends AppCompatActivity {
         adapter = new PriceTaskAdapter();
         recyclerView.setAdapter(adapter);
 
+        viewModel.getAllTasks().observe(this, tasks -> {
+            if (tasks != null) {
+                adapter.setTasks(tasks);
+            }
+        });
+
         adapter.setOnItemClickListener((task, position) -> {
             task.setIsExpanded(!task.getIsExpanded());
             adapter.notifyItemChanged(position);
         });
 
         adapter.setOnDeleteClickListener((task, position) -> {
-            priceItems.remove(position);
-            adapter.setTasks(priceItems);
+            viewModel.delete(task.getId());
         });
         adapter.setOnRefreshClickListener((task, position) -> {
-            task.updateTime();  // обновляем время
-            adapter.updateTask(position);  // обновляем отображение
+            viewModel.update(task.getId());
         });
 
         addButtonPrice.setOnClickListener(v -> {
             AddDialogPrice dialog = new AddDialogPrice();
-            dialog.setOnTaskAddedListener(task -> {
-                priceItems.add(task);
-                adapter.setTasks(priceItems);
+            dialog.setOnTaskAddedListener((name, link) -> {
+                viewModel.insert(name, link);
             });
             updateBalanceDisplay();
             dialog.show(getSupportFragmentManager(), "AddTaskDialog");

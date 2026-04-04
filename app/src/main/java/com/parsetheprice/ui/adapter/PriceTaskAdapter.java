@@ -62,7 +62,6 @@ public class PriceTaskAdapter extends RecyclerView.Adapter<PriceTaskAdapter.View
         holder.linkTextView.setText(link);
         holder.nameTextView.setText(task.getName());
         holder.lastUpdatedTextView.setText(task.getFormattedDate());
-        //holder.nameTextView.setText(task.getName());
 
         holder.deleteButton.setOnClickListener(v -> {
             if (deleteListener != null) {
