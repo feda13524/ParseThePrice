@@ -62,6 +62,7 @@ public class PriceTaskAdapter extends RecyclerView.Adapter<PriceTaskAdapter.View
         holder.linkTextView.setText(link);
         holder.nameTextView.setText(task.getName());
         holder.lastUpdatedTextView.setText(task.getFormattedDate());
+        holder.priceTextView.setText(String.valueOf(task.getPrice()) + "₽");
 
         holder.deleteButton.setOnClickListener(v -> {
             if (deleteListener != null) {
@@ -94,7 +95,7 @@ public class PriceTaskAdapter extends RecyclerView.Adapter<PriceTaskAdapter.View
     }
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView linkTextView, nameTextView;
-        TextView lastUpdatedTextView;
+        TextView lastUpdatedTextView, priceTextView;
         ImageButton refreshButton, deleteButton;
         TextView balancetext;
 
@@ -104,6 +105,7 @@ public class PriceTaskAdapter extends RecyclerView.Adapter<PriceTaskAdapter.View
             nameTextView = itemView.findViewById(R.id.nameTextView);
             lastUpdatedTextView = itemView.findViewById(R.id.lastUpdatedTextView);
             refreshButton = itemView.findViewById(R.id.refreshButton);
+            priceTextView = itemView.findViewById(R.id.price);
             deleteButton = itemView.findViewById(R.id.deleteButton);
             balancetext = itemView.findViewById(R.id.balanceText);
         }
