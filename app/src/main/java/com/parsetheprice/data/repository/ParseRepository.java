@@ -13,6 +13,7 @@ import com.parsetheprice.data.entity.*;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.*;
 
@@ -38,7 +39,11 @@ public class ParseRepository {
         priceTasksFromExpensive = priceTaskDao.getAllTasksFromExpensive();
 
         executor = Executors.newSingleThreadExecutor();
-        httpClient = new OkHttpClient();
+        httpClient = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
         gson = new Gson();
     }
 
