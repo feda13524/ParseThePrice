@@ -72,12 +72,14 @@ public class MainPrice extends AppCompatActivity {
             dialog.setOnTaskAddedListener((name, link) -> {
                 viewModel.insert(name, link);
             });
+            adapter.updateBalance(viewModel.getBalance());
             updateBalanceDisplay();
             dialog.show(getSupportFragmentManager(), "AddTaskDialog");
         });
         balanceButton.setOnClickListener(v -> {
             AddDialogBalance dialog = new AddDialogBalance();
             dialog.setOnBalanceChangeListener(amount -> {viewModel.addBalance(amount);
+                adapter.updateBalance(viewModel.getBalance());
                 updateBalanceDisplay();
             });
             dialog.show(getSupportFragmentManager(), "AddBalanceDialog");
@@ -87,6 +89,9 @@ public class MainPrice extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updateBalanceDisplay();
+        if (adapter != null) {
+            adapter.updateBalance(viewModel.getBalance());
+        }
     }
     private void updateBalanceDisplay() {
         long Balance = viewModel.getBalance();

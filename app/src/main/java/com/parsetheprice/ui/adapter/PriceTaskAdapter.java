@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,6 +64,15 @@ public class PriceTaskAdapter extends RecyclerView.Adapter<PriceTaskAdapter.View
         holder.nameTextView.setText(task.getName());
         holder.lastUpdatedTextView.setText(task.getFormattedDate());
         holder.priceTextView.setText(String.valueOf(task.getPrice()) + "₽");
+        int progress = 0;
+        long price = task.getPrice();
+        if (price > 0) {
+            progress = (int) ((userBalance * 100) / price);
+            if (progress > 100) {
+                progress = 100;
+            }
+        }
+        holder.progressBar.setProgress(progress);
 
         holder.deleteButton.setOnClickListener(v -> {
             if (deleteListener != null) {
@@ -97,6 +107,7 @@ public class PriceTaskAdapter extends RecyclerView.Adapter<PriceTaskAdapter.View
         TextView linkTextView, nameTextView;
         TextView lastUpdatedTextView, priceTextView;
         ImageButton refreshButton, deleteButton;
+        ProgressBar progressBar;
         TextView balancetext;
 
         ViewHolder(View itemView) {
@@ -108,6 +119,7 @@ public class PriceTaskAdapter extends RecyclerView.Adapter<PriceTaskAdapter.View
             priceTextView = itemView.findViewById(R.id.price);
             deleteButton = itemView.findViewById(R.id.deleteButton);
             balancetext = itemView.findViewById(R.id.balanceText);
+            progressBar = itemView.findViewById(R.id.progressBar);
         }
     }
 }
