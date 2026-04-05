@@ -84,6 +84,20 @@ public class PriceTaskAdapter extends RecyclerView.Adapter<PriceTaskAdapter.View
                 refreshListener.onRefreshClick(task, position);
             }
         });
+        char status = task.getStatus();
+        holder.statusTextView.setText(String.valueOf(status));
+
+        switch (status) {
+            case '+':  // успех
+                holder.statusTextView.setTextColor(0xFF00FF00);
+                break;
+            case '-':  // ошибка
+                holder.statusTextView.setTextColor(0xFFFF0000);
+                break;
+            default:   // '?' в процессе
+                holder.statusTextView.setTextColor(0xFFFFA500);
+                break;
+        }
     }
 
     @Override
@@ -105,7 +119,7 @@ public class PriceTaskAdapter extends RecyclerView.Adapter<PriceTaskAdapter.View
     }
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView linkTextView, nameTextView;
-        TextView lastUpdatedTextView, priceTextView;
+        TextView lastUpdatedTextView, priceTextView, statusTextView;
         ImageButton refreshButton, deleteButton;
         ProgressBar progressBar;
         TextView balancetext;
@@ -120,6 +134,7 @@ public class PriceTaskAdapter extends RecyclerView.Adapter<PriceTaskAdapter.View
             deleteButton = itemView.findViewById(R.id.deleteButton);
             balancetext = itemView.findViewById(R.id.balanceText);
             progressBar = itemView.findViewById(R.id.progressBar);
+            statusTextView = itemView.findViewById(R.id.statusTextView);
         }
     }
 }
