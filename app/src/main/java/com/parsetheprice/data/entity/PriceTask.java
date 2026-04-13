@@ -9,8 +9,7 @@ public class PriceTask extends ParseTask{
     public PriceTask(){}
 
     public PriceTask(String name, String link){
-        super(name, link, "");
-        super.setIsPrice(true);
+        super(name, link, "price");
     }
 
     public long getPrice(){ return price; }

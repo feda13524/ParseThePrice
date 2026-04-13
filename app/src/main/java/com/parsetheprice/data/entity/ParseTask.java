@@ -1,6 +1,5 @@
 package com.parsetheprice.data.entity;
 
-
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import java.text.SimpleDateFormat;
@@ -13,12 +12,11 @@ public class ParseTask{
     private long id;
     private String name;
     private String link;
-    private char status; // +parsed -error ?parsing
+    private char status;
     private long createTime;
     private long lastTime;
-    private boolean isPrice;
     private String message;
-    private String parseData;
+    private String parsingResult;
     private boolean isExpanded;
 
     public ParseTask(){}
@@ -28,16 +26,22 @@ public class ParseTask{
         this.link = formatLink(link);
         this.status = '?';
         this.createTime = System.currentTimeMillis();
-        this.lastTime = createTime;
-        this.isPrice = false;
+        this.lastTime = this.createTime;
         this.message = message;
     }
+
     private String formatLink(String link) {
         if (!link.startsWith("http://") && !link.startsWith("https://")) {
             return "https://" + link;
         }
         return link;
     }
+
+    public String getFormattedDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm / dd.MM.yyyy", Locale.getDefault());
+        return sdf.format(new Date(lastTime));
+    }
+    public void updateTime() { this.lastTime = System.currentTimeMillis(); }
 
     public long getId(){ return id; }
     public void setId(long id){ this.id = id; }
@@ -57,24 +61,12 @@ public class ParseTask{
     public long getLastTime(){ return lastTime; }
     public void setLastTime(long lastTime){ this.lastTime = lastTime; }
 
-    public boolean getIsPrice(){ return isPrice; }
-    public void setIsPrice(boolean isPrice){ this.isPrice = isPrice; }
-
     public String getMessage(){ return message; }
     public void setMessage(String message){ this.message = message; }
 
-    public String getParseData(){ return parseData; }
-    public void setParseData(String parseData){ this.parseData = parseData; }
+    public String getParsingResultData(){ return parsingResult; }
+    public void setParsingResultData(String parsingResult){ this.parsingResult = parsingResult; }
 
     public boolean getIsExpanded() { return isExpanded; }
     public void setIsExpanded(boolean isExpanded) { this.isExpanded = isExpanded; }
-
-    public void updateTime() {
-        this.lastTime = System.currentTimeMillis();
-    }
-
-    public String getFormattedDate() {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm / dd.MM.yyyy", Locale.getDefault());
-        return sdf.format(new Date(lastTime));
-    }
 }
