@@ -1,7 +1,7 @@
 package com.parsetheprice.utils;
 
 public class Constants {
-    public static final String DB_NAME = "ptp_database";
-    public static final String USERDATA_NAME = "ptp_userdata";
-    public static final String KEY_BALANCE = "balance";
+    public static final String DATABASE_NAME = "ptp-database";
+    public static final String USERDATA_NAME = "ptp-userdata";
+    public static final String BALANCE_KEY = "balance";
 }

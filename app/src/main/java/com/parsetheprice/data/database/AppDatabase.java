@@ -4,9 +4,9 @@ import android.content.Context;
 import androidx.room.Room;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
-import com.parsetheprice.data.entity.*;
 import com.parsetheprice.data.dao.*;
-import static com.parsetheprice.utils.Constants.DB_NAME;
+import com.parsetheprice.data.entity.*;
+import static com.parsetheprice.utils.Constants.DATABASE_NAME;
 
 @Database(
         entities = {ParseTask.class, PriceTask.class},
@@ -26,7 +26,7 @@ public abstract class AppDatabase extends RoomDatabase{
                     INSTANCE = Room.databaseBuilder(
                             context.getApplicationContext(),
                             AppDatabase.class,
-                            DB_NAME
+                            DATABASE_NAME
                     ).build();
                 }
             }
