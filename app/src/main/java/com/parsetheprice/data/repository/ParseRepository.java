@@ -88,6 +88,7 @@ public class ParseRepository {
             PriceTask task = getPriceTaskById(id);
             task.setStatus('?');
             priceTaskDao.update(task);
+            task.setStatus('-');
 
             try {
                 String jsonRequest =
@@ -108,19 +109,16 @@ public class ParseRepository {
                         String jsonResponse = response.body().string();
                         PriceResponse priceResponse = gson.fromJson(jsonResponse, PriceResponse.class);
 
-                        if (priceResponse.isSuccess()){
+                        if (priceResponse.isSuccessful()){
                             task.setStatus('+');
-                            task.setPrice((long) priceResponse.getPrice());
-                        } else { task.setStatus('-'); }
-                    } else { task.setStatus('-'); }
-                    task.updateTime();
-                    priceTaskDao.update(task);
+                            task.setPrice(priceResponse.getPrice());
+                        }
+                    }
                 }
-            } catch (Exception e) {
-                task.setStatus('-');
-                task.updateTime();
-                priceTaskDao.update(task);
-            }
+            } catch (Exception ignored){}
+
+            task.updateTime();
+            priceTaskDao.update(task);
         });
     }
 }

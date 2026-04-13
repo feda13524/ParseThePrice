@@ -5,6 +5,8 @@ import androidx.room.PrimaryKey;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import static com.parsetheprice.utils.Constants.DATE_PATTERN;
 import static com.parsetheprice.utils.Constants.PARSE_TASK_TABLE_NAME;
 
 @Entity(tableName = PARSE_TASK_TABLE_NAME)
@@ -39,7 +41,7 @@ public class ParseTask{
     }
 
     public String getFormattedDate() {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm / dd.MM.yyyy", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN, Locale.getDefault());
         return sdf.format(new Date(lastTime));
     }
     public void updateTime() { this.lastTime = System.currentTimeMillis(); }

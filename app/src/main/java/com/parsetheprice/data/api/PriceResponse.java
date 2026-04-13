@@ -6,8 +6,8 @@ public class PriceResponse {
     @SerializedName("price")
     private double price;
     @SerializedName("success")
-    private boolean success;
+    private boolean successful;
 
     public double getPrice() { return price; }
-    public boolean isSuccess() { return success; }
+    public boolean isSuccessful() { return successful; }
 }

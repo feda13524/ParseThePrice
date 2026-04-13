@@ -2,8 +2,8 @@ package com.parsetheprice.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import static com.parsetheprice.utils.Constants.KEY_BALANCE;
 import static com.parsetheprice.utils.Constants.USERDATA_NAME;
+import static com.parsetheprice.utils.Constants.BALANCE_KEY;
 
 public class SharedPreferencesManager {
     private final SharedPreferences sharedPreferences;
@@ -13,10 +13,8 @@ public class SharedPreferencesManager {
     }
 
     public void saveBalance(long balance) {
-        sharedPreferences.edit().putLong(KEY_BALANCE, balance).apply();
+        sharedPreferences.edit().putLong(BALANCE_KEY, balance).apply();
     }
 
-    public long loadBalance() {
-        return sharedPreferences.getLong(KEY_BALANCE, 0);
-    }
+    public long loadBalance() { return sharedPreferences.getLong(BALANCE_KEY, 0); }
 }
