@@ -67,8 +67,8 @@ public class ParseTask{
     public String getMessage(){ return message; }
     public void setMessage(String message){ this.message = message; }
 
-    public String getParsingResultData(){ return parsingResult; }
-    public void setParsingResultData(String parsingResult){ this.parsingResult = parsingResult; }
+    public String getParsingResult(){ return parsingResult; }
+    public void setParsingResult(String parsingResult){ this.parsingResult = parsingResult; }
 
     public boolean getIsExpanded() { return isExpanded; }
     public void setIsExpanded(boolean isExpanded) { this.isExpanded = isExpanded; }
