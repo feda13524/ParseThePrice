@@ -1,17 +1,16 @@
 package com.parsetheprice.data.entity;
 
 import androidx.room.Entity;
+import static com.parsetheprice.utils.Constants.PRICE_TASK_TABLE_NAME;
 
-@Entity(tableName = "price_tasks")
+@Entity(tableName = PRICE_TASK_TABLE_NAME)
 public class PriceTask extends ParseTask{
-    private long price;
+    private double price;
 
     public PriceTask(){}
 
-    public PriceTask(String name, String link){
-        super(name, link, "price");
-    }
+    public PriceTask(String name, String link){ super(name, link, ""); }
 
-    public long getPrice(){ return price; }
-    public void setPrice(long price){ this.price = price; }
+    public double getPrice(){ return price; }
+    public void setPrice(double price){ this.price = price; }
 }

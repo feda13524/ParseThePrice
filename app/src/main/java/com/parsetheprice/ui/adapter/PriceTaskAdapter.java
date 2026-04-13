@@ -65,7 +65,7 @@ public class PriceTaskAdapter extends RecyclerView.Adapter<PriceTaskAdapter.View
         holder.lastUpdatedTextView.setText(task.getFormattedDate());
         holder.priceTextView.setText(String.valueOf(task.getPrice()) + "₽");
         int progress = 0;
-        long price = task.getPrice();
+        double price = task.getPrice();
         if (price > 0) {
             progress = (int) ((userBalance * 100) / price);
             if (progress > 100) {

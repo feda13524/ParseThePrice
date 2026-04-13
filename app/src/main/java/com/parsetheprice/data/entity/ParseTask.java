@@ -5,8 +5,9 @@ import androidx.room.PrimaryKey;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import static com.parsetheprice.utils.Constants.PARSE_TASK_TABLE_NAME;
 
-@Entity(tableName = "parse_tasks")
+@Entity(tableName = PARSE_TASK_TABLE_NAME)
 public class ParseTask{
     @PrimaryKey(autoGenerate = true)
     private long id;

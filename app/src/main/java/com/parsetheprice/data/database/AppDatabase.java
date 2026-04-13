@@ -7,10 +7,11 @@ import androidx.room.RoomDatabase;
 import com.parsetheprice.data.dao.*;
 import com.parsetheprice.data.entity.*;
 import static com.parsetheprice.utils.Constants.DATABASE_NAME;
+import static com.parsetheprice.utils.Constants.DATABASE_VERSION;
 
 @Database(
         entities = {ParseTask.class, PriceTask.class},
-        version = 1,
+        version = DATABASE_VERSION,
         exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase{
