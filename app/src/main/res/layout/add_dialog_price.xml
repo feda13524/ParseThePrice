@@ -22,16 +22,14 @@
             android:layout_marginBottom="10dp"
             android:src="@android:drawable/ic_menu_close_clear_cancel"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Закрыть"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"/>
+            android:contentDescription="@string/close_button"/>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:hint="Название">
+            android:hint="@string/name_hint">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameEditText"
@@ -44,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:hint="Ссылка">
+            android:hint="@string/link_hint">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/linkEditText"
@@ -58,7 +56,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="0dp"
-                android:contentDescription="Добавить"
+                android:contentDescription="@string/add_button"
                 android:src="@drawable/plus"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
