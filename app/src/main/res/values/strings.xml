@@ -1,12 +1,11 @@
 <resources>
     <string name="app_name">ParseThePrice</string>
-    <string name="close_button">Закрыть</string>
+    <string name="parsing_title">ПАРСИНГ</string>
+    <string name="price_title">КОПИЛКА</string>
     <string name="name_hint">Название</string>
     <string name="link_hint">Ссылка</string>
     <string name="tracking_hint">Хочу отслеживать</string>
     <string name="add_button">Добавить</string>
     <string name="back_button">Назад</string>
-    <string name="parsing_title">ПАРСИНГ</string>
-    <string name="price_title">КОПИЛКА</string>
     <string name="balance_button">Баланс</string>
 </resources>
