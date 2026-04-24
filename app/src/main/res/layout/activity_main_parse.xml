@@ -35,7 +35,8 @@
         android:layout_height="48dp"
         android:src="@drawable/plus"
         android:contentDescription="Добавить"
-        android:layout_margin="30dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
