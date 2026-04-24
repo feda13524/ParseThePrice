@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
             // Устанавливаем цвета
-            window.setStatusBarColor(Color.parseColor("#6200EE"));  // Фиолетовый (твой parse_color)
-            window.setNavigationBarColor(Color.parseColor("#03DAC5")); // Бирюзовый (твой price_color)
+            window.setStatusBarColor(Color.parseColor("#E3F2FD"));  //
+            window.setNavigationBarColor(Color.parseColor("#F3E5F5")); //
         }
 
     }
