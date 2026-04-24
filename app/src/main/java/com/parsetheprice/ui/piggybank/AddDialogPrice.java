@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -51,11 +50,6 @@ public class AddDialogPrice extends DialogFragment {
         EditText nameEditText = view.findViewById(R.id.nameEditText);
         EditText linkEditText = view.findViewById(R.id.linkEditText);
         ImageView addButton = view.findViewById(R.id.addButtonPrice);
-        ImageButton closeButton = view.findViewById(R.id.closeButton);
-
-        closeButton.setOnClickListener(v -> {
-            dismiss();
-        });
 
         addButton.setOnClickListener(v -> {
             String name = nameEditText.getText().toString().trim();
