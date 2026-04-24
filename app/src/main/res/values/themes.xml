@@ -1,9 +1,13 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.ParseThePrice" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-    </style>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.ParseThePrice" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Делаем верхнюю полоску (статус бар) прозрачной -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
 
-    <style name="Theme.ParseThePrice" parent="Base.Theme.ParseThePrice" />
+        <!-- Делаем нижнюю полоску (навигация) прозрачной -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+
+        <!-- Разрешаем рисовать поверх полосок -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
 </resources>
