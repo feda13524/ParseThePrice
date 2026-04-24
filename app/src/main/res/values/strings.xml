@@ -8,4 +8,5 @@
     <string name="back_button">Назад</string>
     <string name="parsing_title">ПАРСИНГ</string>
     <string name="price_title">КОПИЛКА</string>
+    <string name="balance_button">Баланс</string>
 </resources>
