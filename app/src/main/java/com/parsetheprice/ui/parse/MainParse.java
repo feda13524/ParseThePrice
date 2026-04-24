@@ -1,5 +1,7 @@
 package com.parsetheprice.ui.parse;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +15,9 @@ import com.parsetheprice.ui.adapter.ParseTaskAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -29,7 +34,17 @@ public class MainParse extends AppCompatActivity {
         setContentView(R.layout.activity_main_parse);
         ImageButton btnBack = findViewById(R.id.btnBack);
         viewModel = new ViewModelProvider(this).get(ParseViewModel.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
 
+            // Снимаем все ограничения
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            // Устанавливаем цвета
+            window.setNavigationBarColor(Color.parseColor("#E3F2FD")); //
+        }
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
