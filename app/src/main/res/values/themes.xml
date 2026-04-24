@@ -1,6 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.ParseThePrice" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ParseThePrice" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:statusBarColor">@color/parse_color</item>
         <item name="android:navigationBarColor">@color/price_color</item>
     </style>
+
+    <style name="Theme.ParseThePrice" parent="Base.Theme.ParseThePrice" />
 </resources>
