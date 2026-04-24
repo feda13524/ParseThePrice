@@ -103,11 +103,9 @@
             android:layout_margin="4dp" />
 
         <ImageView
-            android:id="@+id/btnDelete"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_columnWeight="1"
-            android:src="@drawable/backspace"
             android:layout_margin="4dp" />
 
         <ImageView
@@ -117,6 +115,14 @@
             android:src="@drawable/counter_0"
             android:layout_columnWeight="1"
             android:textSize="20sp"
+            android:layout_margin="4dp" />
+
+        <ImageView
+            android:id="@+id/btnDelete"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_columnWeight="1"
+            android:src="@drawable/backspace"
             android:layout_margin="4dp" />
 
         <View
