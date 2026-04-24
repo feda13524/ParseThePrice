@@ -42,14 +42,20 @@
                 android:inputType="textUri" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end">
+
             <ImageView
                 android:id="@+id/addButtonPrice"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_margin="0dp"
+                android:layout_margin="10dp"
                 android:contentDescription="@string/add_button"
                 android:src="@drawable/plus"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
