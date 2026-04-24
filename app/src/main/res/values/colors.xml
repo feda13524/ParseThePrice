@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="price_color">#F3E5F5</color>
-    <color name="bottom_section">#F3E5F5</color>
     <color name="divider_color">#9E9E9E</color>
     <color name="parse_color">#E3F2FD</color>
     <color name="txt_color">#2A272B</color>

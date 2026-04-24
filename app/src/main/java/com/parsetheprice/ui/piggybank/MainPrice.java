@@ -11,8 +11,6 @@ import com.parsetheprice.R;
 import com.parsetheprice.data.entity.PriceTask;
 import com.parsetheprice.ui.adapter.PriceTaskAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,7 +18,6 @@ import android.widget.TextView;
 public class MainPrice extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PriceTaskAdapter adapter;
-    private List<PriceTask> priceItems = new ArrayList<>();
     private PriceViewModel viewModel;
     private TextView balance;
 
