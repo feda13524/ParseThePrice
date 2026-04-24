@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
             // Устанавливаем цвета
-            window.setStatusBarColor(Color.parseColor("#E3F2FD"));  //
+//            window.setStatusBarColor(Color.parseColor("#E3F2FD"));  //
             window.setNavigationBarColor(Color.parseColor("#F3E5F5")); //
         }
 
