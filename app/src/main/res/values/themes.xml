@@ -1,13 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.ParseThePrice" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Делаем верхнюю полоску (статус бар) прозрачной -->
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <!-- Цвет статус бара (верхняя полоска) = цвету верхней секции -->
+        <item name="android:statusBarColor">@color/parse_color</item>
 
-        <!-- Делаем нижнюю полоску (навигация) прозрачной -->
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-
-        <!-- Разрешаем рисовать поверх полосок -->
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <!-- Цвет навигационной панели (нижняя полоска) = цвету нижней секции -->
+        <item name="android:navigationBarColor">@color/price_color</item>
     </style>
 </resources>
