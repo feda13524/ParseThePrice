@@ -21,13 +21,13 @@
                 android:id="@+id/imageView"
                 android:layout_width="58dp"
                 android:layout_height="58dp"
-                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
                 app:srcCompat="@drawable/search" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ПАРСИНГ"
+                android:text="@string/parsing_title"
                 android:textColor="@color/txt_color"
                 android:textSize="30sp"
 
@@ -62,13 +62,13 @@
             android:id="@+id/imageView3"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp"
             app:srcCompat="@drawable/saving" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="КОПИЛКА"
+            android:text="@string/price_title"
             android:textColor="@color/txt_color"
             android:textSize="30sp"
             android:textStyle="bold" />
