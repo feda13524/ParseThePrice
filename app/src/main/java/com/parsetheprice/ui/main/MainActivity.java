@@ -1,8 +1,12 @@
 package com.parsetheprice.ui.main;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
@@ -37,6 +41,18 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+
+            // Снимаем все ограничения
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            // Устанавливаем цвета
+            window.setStatusBarColor(Color.parseColor("#6200EE"));  // Фиолетовый (твой parse_color)
+            window.setNavigationBarColor(Color.parseColor("#03DAC5")); // Бирюзовый (твой price_color)
+        }
 
     }
 }
