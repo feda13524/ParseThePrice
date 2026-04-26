@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import com.parsetheprice.data.dao.*;
 import com.parsetheprice.data.entity.*;
 import com.parsetheprice.data.database.AppDatabase;
-import com.parsetheprice.data.api.PriceResponse;
+import com.parsetheprice.data.api.*;
 
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -17,6 +17,7 @@ import okhttp3.*;
 import com.google.gson.Gson;
 
 import static com.parsetheprice.utils.Constants.API_URL;
+import static com.parsetheprice.utils.Constants.PARSE_TASK_REQUEST_ENDPOINT;
 import static com.parsetheprice.utils.Constants.PRICE_TASK_REQUEST_ENDPOINT;
 
 public class ParseRepository {
@@ -63,7 +64,42 @@ public class ParseRepository {
     }
 
     public void updateParseTask(long id){
-        executor.execute(() -> parseTaskDao.update(getParseTaskById(id)));
+        executor.execute(() -> {
+            ParseTask task = getParseTaskById(id);
+            task.setStatus('?');
+            parseTaskDao.update(task);
+            task.setStatus('-');
+
+            try {
+                String jsonRequest =
+                        "{\"url\":\"" + task.getLink() + "\",\"message\":\"" + task.getMessage() + "\"}";
+
+                RequestBody body = RequestBody.create(
+                        jsonRequest,
+                        MediaType.parse("application/json")
+                );
+
+                Request request = new Request.Builder()
+                        .url(API_URL + PARSE_TASK_REQUEST_ENDPOINT)
+                        .post(body)
+                        .build();
+
+                try (Response response = httpClient.newCall(request).execute()) {
+                    if (response.isSuccessful()) {
+                        String jsonResponse = response.body().string();
+                        ParseResponse parseResponse = gson.fromJson(jsonResponse, ParseResponse.class);
+
+                        if (parseResponse.isSuccessful()){
+                            task.setStatus('+');
+                            task.setParsingResult(parseResponse.getResult());
+                        }
+                    }
+                }
+            } catch (Exception ignored){}
+
+            task.updateTime();
+            parseTaskDao.update(task);
+        });
     }
 
     // PRICE TASKS METHODS
