@@ -1,4 +1,4 @@
-package com.parsetheprice.ui.parse;
+package com.parsetheprice.ui.parsing;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.parsetheprice.R;
-import com.parsetheprice.data.entity.ParseTask;
 import com.parsetheprice.ui.adapter.ParseTaskAdapter;
 
 import android.view.Window;

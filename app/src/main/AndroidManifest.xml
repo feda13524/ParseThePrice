@@ -22,8 +22,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.parse.MainParse"
-            android:parentActivityName=".ui.parse.MainParse" />
+            android:name=".ui.parsing.MainParse"
+            android:parentActivityName=".ui.parsing.MainParse" />
 
         <activity
             android:name=".ui.piggybank.MainPrice"
