@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class PriceResponse {
     @SerializedName("price")
     private double price;
-    @SerializedName("success")
+    @SerializedName("successful")
     private boolean successful;
 
     public double getPrice() { return price; }
