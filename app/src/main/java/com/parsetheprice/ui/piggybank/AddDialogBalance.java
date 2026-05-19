@@ -1,6 +1,5 @@
 package com.parsetheprice.ui.piggybank;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -22,7 +21,7 @@ public class AddDialogBalance extends DialogFragment {
     private Button btnAdd;
     private Button btnSubtract;
 
-    private StringBuilder inputNumber = new StringBuilder();
+    private final StringBuilder inputNumber = new StringBuilder();
     private OnBalanceChangeListener listener;
 
     public interface OnBalanceChangeListener {
@@ -68,7 +67,6 @@ public class AddDialogBalance extends DialogFragment {
     }
 
     private void setupNumberButtons() {
-        // Для цифры 1
         btn1.setOnClickListener(v -> {
             inputNumber.append("1");
             updateInputDisplay();
@@ -152,13 +150,12 @@ public class AddDialogBalance extends DialogFragment {
         });
     }
     private long getInputValue() {
-        if (TextUtils.isEmpty(inputNumber.toString())) {
-            return 0;
-        }
+        if (TextUtils.isEmpty(inputNumber.toString())) { return 0; }
         return Long.parseLong(inputNumber.toString());
     }
     private void updateInputDisplay() {
-        if (inputNumber.length() == 0) {
+        if (inputNumber.length() == 0 || Long.parseLong(inputNumber.toString()) == 0) {
+            inputNumber.setLength(0);
             InputNumber.setText("0");
         } else {
             InputNumber.setText(inputNumber.toString());

@@ -24,6 +24,7 @@ public class ParseViewModel extends AndroidViewModel{
     public void insert(String name, String link, String message){
         ParseTask task = new ParseTask(name, link, message);
         repository.insert(task);
+        repository.updateParseTask(task.getId());
     }
     public void update(long id){ repository.updateParseTask(id); }
     public void delete(long id){ repository.deleteParseTask(id); }

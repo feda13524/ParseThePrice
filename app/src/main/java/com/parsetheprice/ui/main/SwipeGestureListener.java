@@ -14,7 +14,7 @@ public class SwipeGestureListener extends GestureDetector.SimpleOnGestureListene
     private static final int SWIPE_THRESHOLD = 100;
     private static final int SWIPE_VELOCITY_THRESHOLD = 100;
 
-    private Activity activity;
+    private final Activity activity;
 
     public SwipeGestureListener(Activity activity) {
         this.activity = activity;

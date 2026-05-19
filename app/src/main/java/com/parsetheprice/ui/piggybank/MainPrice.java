@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.parsetheprice.R;
-import com.parsetheprice.data.entity.PriceTask;
 import com.parsetheprice.ui.adapter.PriceTaskAdapter;
 
 import android.widget.ImageButton;
@@ -73,6 +72,7 @@ public class MainPrice extends AppCompatActivity {
             updateBalanceDisplay();
             dialog.show(getSupportFragmentManager(), "AddTaskDialog");
         });
+
         balanceButton.setOnClickListener(v -> {
             AddDialogBalance dialog = new AddDialogBalance();
             dialog.setOnBalanceChangeListener(amount -> {viewModel.addBalance(amount);
@@ -82,6 +82,7 @@ public class MainPrice extends AppCompatActivity {
             dialog.show(getSupportFragmentManager(), "AddBalanceDialog");
         });
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -90,6 +91,7 @@ public class MainPrice extends AppCompatActivity {
             adapter.updateBalance(viewModel.getBalance());
         }
     }
+
     private void updateBalanceDisplay() {
         long Balance = viewModel.getBalance();
         balance.setText(String.valueOf(Balance));
