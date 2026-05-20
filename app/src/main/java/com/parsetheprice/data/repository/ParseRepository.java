@@ -45,9 +45,9 @@ public class ParseRepository {
 
         executor = Executors.newSingleThreadExecutor();
         httpClient = new OkHttpClient.Builder()
-                .connectTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS)
-                .writeTimeout(20, TimeUnit.SECONDS)
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(10, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
                 .build();
         gson = new Gson();
     }
@@ -57,7 +57,12 @@ public class ParseRepository {
 
     public ParseTask getParseTaskById(long id){ return parseTaskDao.getTaskById(id); }
 
-    public void insert(ParseTask task){ executor.execute(() -> parseTaskDao.insert(task)); }
+    public void insert(ParseTask task){
+        executor.execute(() -> {
+            final long id = parseTaskDao.insert(task);
+            updateParseTask(id);
+        });
+    }
 
     public void deleteParseTask(long id){
         executor.execute(() -> parseTaskDao.delete(getParseTaskById(id)));
@@ -113,7 +118,12 @@ public class ParseRepository {
 
     public PriceTask getPriceTaskById(long id){ return priceTaskDao.getTaskById(id); }
 
-    public void insert(PriceTask task){ executor.execute(() -> priceTaskDao.insert(task)); }
+    public void insert(PriceTask task){
+        executor.execute(() -> {
+            final long id = priceTaskDao.insert(task);
+            updatePriceTask(id);
+        });
+    }
 
     public void deletePriceTask(long id){
         executor.execute(() -> priceTaskDao.delete(priceTaskDao.getTaskById(id)));

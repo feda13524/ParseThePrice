@@ -10,10 +10,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:screenOrientation="portrait"
         android:theme="@style/Theme.ParseThePrice">
         <activity
             android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,10 +23,12 @@
         </activity>
         <activity
             android:name=".ui.parsing.MainParse"
+            android:screenOrientation="portrait"
             android:parentActivityName=".ui.parsing.MainParse" />
 
         <activity
             android:name=".ui.piggybank.MainPrice"
+            android:screenOrientation="portrait"
             android:parentActivityName=".ui.piggybank.MainPrice" />
     </application>
 

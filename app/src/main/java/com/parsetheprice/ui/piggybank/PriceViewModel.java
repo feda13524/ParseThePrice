@@ -32,7 +32,6 @@ public class PriceViewModel extends AndroidViewModel{
     public void insert(String name, String link){
         PriceTask task = new PriceTask(name, link);
         repository.insert(task);
-        repository.updatePriceTask(task.getId());
     }
     public void update(long id){ repository.updatePriceTask(id); }
     public void delete(long id){ repository.deletePriceTask(id); }
@@ -40,5 +39,5 @@ public class PriceViewModel extends AndroidViewModel{
     // BALANCE
     public long getBalance(){ return prefMgr.loadBalance(); }
     public void setBalance(long newBalance){ prefMgr.saveBalance(newBalance); }
-    public void addBalance(long sum){ setBalance(getBalance() + sum); }
+    public void addBalance(long sum){ setBalance(Math.max(getBalance() + sum, 0)); }
 }

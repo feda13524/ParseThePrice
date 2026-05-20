@@ -8,4 +8,8 @@
     <string name="add_button">Добавить</string>
     <string name="back_button">Назад</string>
     <string name="balance_button">Баланс</string>
+    <string name="ok_status">ОК</string>
+    <string name="pending_status">В процессе</string>
+    <string name="error_status">Ошибка</string>
+    <string name="sort_by_time">По времени</string>
 </resources>
