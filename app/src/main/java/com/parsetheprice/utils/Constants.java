@@ -12,6 +12,7 @@ public class Constants {
 
     public static final String USERDATA_NAME = "ptp-userdata";
     public static final String BALANCE_KEY = "balance";
+    public static final String SORT_TYPE_KEY = "sort_type";
 
     public static final String DATE_PATTERN = "HH:mm / dd.MM.yyyy";
 }

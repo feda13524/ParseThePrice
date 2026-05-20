@@ -25,10 +25,32 @@ public class MainPrice extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_price);
         ImageButton btnBack = findViewById(R.id.btnBack);
+        TextView sortButton = findViewById(R.id.sortButton);
+        ImageView addButtonPrice = findViewById(R.id.addButtonPrice);
+        ImageView balanceButton = findViewById(R.id.balanceButton);
         balance = findViewById(R.id.balanceText);
+
+        recyclerView = findViewById(R.id.tasksRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        adapter = new PriceTaskAdapter();
+        recyclerView.setAdapter(adapter);
+
         viewModel = new ViewModelProvider(this).get(PriceViewModel.class);
+        viewModel.getTasks().observe(this, tasks -> {
+            if (tasks != null) {
+                adapter.setTasks(tasks);
+            }
+        });
 
         updateBalanceDisplay();
+
+        adapter.setOnDeleteClickListener((task, position) -> {
+            viewModel.delete(task.getId());
+        });
+        adapter.setOnRefreshClickListener((task, position) -> {
+            viewModel.update(task.getId());
+        });
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,25 +59,28 @@ public class MainPrice extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_up);
             }
         });
-        recyclerView = findViewById(R.id.tasksRecyclerView);
-        ImageView addButtonPrice = findViewById(R.id.addButtonPrice);
-        ImageView balanceButton = findViewById(R.id.balanceButton);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new PriceTaskAdapter();
-        recyclerView.setAdapter(adapter);
-
-        viewModel.getAllTasks().observe(this, tasks -> {
-            if (tasks != null) {
-                adapter.setTasks(tasks);
+        sortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.changeSortKey();
+                switch (viewModel.getSortKey()){
+                    case 1:
+                        sortButton.setText(getString(R.string.sort_by_expensive));
+                        break;
+                    case 2:
+                        sortButton.setText(getString(R.string.sort_by_cheap));
+                        break;
+                    default:
+                        sortButton.setText(getString(R.string.sort_by_time));
+                        break;
+                }
+                viewModel.getTasks().observe(MainPrice.this, tasks -> {
+                    if (tasks != null) {
+                        adapter.setTasks(tasks);
+                    }
+                });
             }
-        });
-
-        adapter.setOnDeleteClickListener((task, position) -> {
-            viewModel.delete(task.getId());
-        });
-        adapter.setOnRefreshClickListener((task, position) -> {
-            viewModel.update(task.getId());
         });
 
         addButtonPrice.setOnClickListener(v -> {
@@ -87,7 +112,7 @@ public class MainPrice extends AppCompatActivity {
     }
 
     private void updateBalanceDisplay() {
-        long Balance = viewModel.getBalance();
-        balance.setText(String.valueOf(Balance) + " ₽");
+        long amount = viewModel.getBalance();
+        balance.setText(String.valueOf(amount) + " ₽");
     }
 }

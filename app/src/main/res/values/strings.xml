@@ -12,4 +12,6 @@
     <string name="pending_status">В процессе</string>
     <string name="error_status">Ошибка</string>
     <string name="sort_by_time">По времени</string>
+    <string name="sort_by_expensive">Дорогие</string>
+    <string name="sort_by_cheap">Дешёвые</string>
 </resources>
