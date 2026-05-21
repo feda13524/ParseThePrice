@@ -1,0 +1,154 @@
+@startuml
+
+' Настройка внешнего вида
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FEFEFE
+skinparam class {
+  BackgroundColor White
+  BorderColor #2C3E50
+  ArrowColor #3498DB
+}
+
+' ===== ENTITY (Модель данных) =====
+package "com.parsetheprice.data.entity" {
+
+  abstract class ParseTask {
+    - id: long
+    - name: String
+    - link: String
+    - status: char
+    - createTime: long
+    - lastTime: long
+    - message: String
+    - parsingResult: String
+    - isExpanded: boolean
+    --
+    + ParseTask()
+    + getFormattedDate(): String
+    + updateTime(): void
+    + getId(): long
+    + getName(): String
+    + getLink(): String
+    + getStatus(): char
+    + getParsingResult(): String
+    + setIsExpanded(boolean): void
+  }
+
+  class PriceTask {
+    - price: double
+    --
+    + PriceTask()
+    + getPrice(): double
+    + setPrice(double): void
+  }
+
+  ParseTask <|-- PriceTask
+
+}
+
+' ===== DAO (Доступ к данным) =====
+package "com.parsetheprice.data.dao" {
+
+  interface ParseTaskDao {
+    + insert(ParseTask): long
+    + update(ParseTask): void
+    + delete(ParseTask): void
+    + getAllTasks(): LiveData<List<ParseTask>>
+    + getTaskById(long): ParseTask
+  }
+
+  interface PriceTaskDao {
+    + insert(PriceTask): long
+    + update(PriceTask): void
+    + delete(PriceTask): void
+    + getAllTasks(): LiveData<List<PriceTask>>
+    + getAllTasksFromCheap(): LiveData<List<PriceTask>>
+    + getAllTasksFromExpensive(): LiveData<List<PriceTask>>
+  }
+
+}
+
+' ===== REPOSITORY =====
+package "com.parsetheprice.data.repository" {
+
+  class ParseRepository {
+    - parseTaskDao: ParseTaskDao
+    - priceTaskDao: PriceTaskDao
+    - executor: ExecutorService
+    - httpClient: OkHttpClient
+    - gson: Gson
+    --
+    + ParseRepository(Application)
+    + getAllParseTasks(): LiveData<List<ParseTask>>
+    + getAllPriceTasks(): LiveData<List<PriceTask>>
+    + insert(ParseTask): void
+    + insert(PriceTask): void
+    + updateParseTask(long): void
+    + updatePriceTask(long): void
+    + deleteParseTask(long): void
+    + deletePriceTask(long): void
+  }
+
+  ParseRepository ..> ParseTaskDao : uses
+  ParseRepository ..> PriceTaskDao : uses
+  ParseRepository --> ParseTask : creates
+  ParseRepository --> PriceTask : creates
+
+}
+
+' ===== VIEWMODEL =====
+package "com.parsetheprice.ui.parsing" {
+
+  class ParseViewModel {
+    - repository: ParseRepository
+    --
+    + ParseViewModel(Application)
+    + getAllTasks(): LiveData<List<ParseTask>>
+    + insert(String, String, String): void
+    + update(long): void
+    + delete(long): void
+  }
+
+  ParseViewModel --> ParseRepository : uses
+  ParseViewModel --> ParseTask : observes
+}
+
+package "com.parsetheprice.ui.piggybank" {
+
+  class PriceViewModel {
+    - repository: ParseRepository
+    - prefMgr: SharedPreferencesManager
+    --
+    + PriceViewModel(Application)
+    + getTasks(): LiveData<List<PriceTask>>
+    + insert(String, String): void
+    + update(long): void
+    + delete(long): void
+    + getBalance(): long
+    + addBalance(long): void
+    + changeSortKey(): void
+  }
+
+  PriceViewModel --> ParseRepository : uses
+  PriceViewModel --> PriceTask : observes
+}
+
+' ===== КЛИЕНТ-СЕРВЕР (дополнительно) =====
+package "Серверная часть (Spring Boot)" #LightBlue {
+
+  class Controller {
+    + price(PriceRequest): PriceResponse
+    + parse(ParseRequest): ParseResponse
+  }
+
+  class Parser {
+    + initialize(): void
+    + findPrice(String): Double
+    + getRawText(String): String
+    + shutdown(): void
+  }
+
+  Controller ..> Parser : вызывает
+}
+
+@enduml
